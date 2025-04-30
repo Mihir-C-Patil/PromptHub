@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Text input field for the prompt -->
+    <EditText
+        android:id="@+id/promptInput"
+        android:hint="@string/enter_your_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text" />
+
+    <!-- Generate Image button -->
+    <Button
+        android:id="@+id/generateBtn"
+        android:text="@string/generate_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- ImageView for displaying the generated image -->
+    <ImageView
+        android:id="@+id/generatedImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <!-- Save button, initially hidden -->
+    <Button
+        android:id="@+id/saveBtn"
+        android:text="@string/save_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</LinearLayout>
