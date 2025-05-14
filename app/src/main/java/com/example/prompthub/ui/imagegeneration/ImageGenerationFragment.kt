@@ -102,7 +102,7 @@ class ImageGenerationFragment : Fragment() {
             if (url != null) {
                 val fullImageUrl = "https://ai.elliottwen.info/$url"
                 imageView.load(fullImageUrl) {
-                    crossfade(true)
+                    crossfade(false)
                     placeholder(R.drawable.prompthub_logo)
                     error(R.drawable.prompthub_image_error)
                 }
