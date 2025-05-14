@@ -1,20 +1,14 @@
-package com.example.prompthub
+package com.example.prompthub // Make sure this matches your actual package name
 
-import android.graphics.Bitmap
-import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import android.util.Log
-import com.bumptech.glide.Glide
-import java.io.IOException
+import android.os.Bundle
+import com.example.prompthub.R
 
 class MainActivity : AppCompatActivity() {
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Set the content view of the activity to the layout defined in activity_main.xml
+        setContentView(R.layout.activity_main)
+    }
 }

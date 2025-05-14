@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
     implementation(libs.moshi.kotlin)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     // Coroutines for asynchronous operations
     implementation(libs.kotlinx.coroutines.android)
