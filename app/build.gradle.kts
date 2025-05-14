@@ -51,4 +51,14 @@ dependencies {
 
     implementation(libs.glide) // Use latest Glide version
     annotationProcessor(libs.compiler)  // Required for Glide's annotation processor
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi.kotlin)
+
+    // Coroutines for asynchronous operations
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Image Loading (Coil)
+    implementation(libs.coil)
 }
