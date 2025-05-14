@@ -15,5 +15,5 @@ interface ApiService {
     suspend fun generateImage(
         @Header("Authorization") authorization: String,
         @Body request: GenerateImageRequest
-    ): Response<GenerateImageResponse>
+    ): Response<String>
 }

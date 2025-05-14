@@ -40,7 +40,7 @@ class ImageGenerationFragment : Fragment() {
 
     private lateinit var viewModel: ImageViewModel
 
-    private val AUTH_HEADER = "Bearer your_actual_auth_header"
+    private val AUTH_HEADER = "your_actual_auth_header"
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -100,7 +100,8 @@ class ImageGenerationFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.imageUrl.observe(viewLifecycleOwner) { url ->
             if (url != null) {
-                imageView.load(url) {
+                val fullImageUrl = "https://ai.elliottwen.info/$url"
+                imageView.load(fullImageUrl) {
                     crossfade(true)
                     placeholder(R.drawable.prompthub_logo)
                     error(R.drawable.prompthub_image_error)

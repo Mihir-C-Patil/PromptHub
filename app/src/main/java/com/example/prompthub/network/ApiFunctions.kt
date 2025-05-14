@@ -5,6 +5,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.GenerateImageRequest
+import retrofit2.Response
 
 private const val TAG = "ApiFunctions"
 
@@ -47,10 +48,11 @@ suspend fun generateImage(
 
     return try {
         val generateImageRequest = GenerateImageRequest(signature, prompt)
-        val response = apiService.generateImage(authHeader, generateImageRequest)
+        val response: Response<String> = apiService.generateImage(authHeader, generateImageRequest)
+        Log.d(TAG, "Image generation response: $response")
 
         if (response.isSuccessful) {
-            response.body()?.url
+            response.body()
         } else {
             Log.e(
                 TAG,
