@@ -73,39 +73,65 @@ android {
         jvmTarget = "11"
     }
     applicationVariants.all {
-        // Only for release builds
-        if (buildType.name == "release") {
-            assembleProvider?.configure {
-                doLast {
-                    val apkFile: RegularFile? = outputs.first().outputFile
-                    if (apkFile == null || !apkFile.asFile.exists()) {
-                        throw GradleException("APK file not found!")
-                    }
+        val variant = this
+        if (variant.buildType.name == "release") {
+            variant.outputs.forEach { output ->
+                val outputFile = output.outputFile
+                if ((outputFile != null) && outputFile.name.endsWith(".apk")) {
+                    val assembleTask = variant.assembleProvider.get()
+                    assembleTask.doLast {
+                        val apkFile = outputFile
 
-                    val headerDir = projectDir.resolve("src/main/cpp/generated/").also { it.mkdirs() }
-                    val hash = ByteArrayOutputStream()
-
-                    project.exec {
-                        if (System.getProperty("os.name").contains("Windows", ignoreCase = true)) {
-                            commandLine("cmd", "/c", "certutil -hashfile \"${apkFile.asFile.absolutePath}\" SHA256 | find /v \"hashfile\"")
-                        } else {
-                            commandLine("sh", "-c", "openssl dgst -sha256 \"${apkFile.asFile.absolutePath}\" | awk '{print \$2}'")
+                        if (!apkFile.exists()) {
+                            logger.error("APK not found at: ${apkFile.absolutePath}")
+                            return@doLast
                         }
-                        standardOutput = hash
+
+                        val headerDir = projectDir.resolve("src/main/cpp/generated/").apply {
+                            mkdirs()
+                        }
+                        val hashStream = ByteArrayOutputStream()
+
+                        project.exec {
+                            if (System.getProperty("os.name", "").contains("Windows", true)) {
+                                commandLine(
+                                    "cmd", "/c",
+                                    "certutil -hashfile \"${outputFile.absolutePath}\" SHA256 | find /v \"hashfile\" | find /v \"CertUtil\""
+                                )
+                            } else {
+                                commandLine(
+                                    "sh", "-c",
+                                    "openssl dgst -sha256 \"${outputFile.absolutePath}\" | awk '{print \$2}'"
+                                )
+                            }
+                            standardOutput = hashStream
+                        }
+
+                        // Process output to get just the hash
+                        val rawOutput = hashStream.toString().trim()
+                        val hash = if (System.getProperty("os.name", "").contains("Windows", true)) {
+                            // For Windows: Take last line and remove any non-hex characters
+                            rawOutput.lines().last()
+                                .replace("[^a-fA-F0-9]".toRegex(), "")
+                        } else {
+                            // For Unix: Already clean output
+                            rawOutput
+                        }
+
+                        headerDir.resolve("expected_hash.h").writeText("""
+                            // Auto-generated - DO NOT EDIT
+                            #pragma once
+                            const char* EXPECTED_APK_HASH = "$hash";
+                        """.trimIndent())
+
+                        logger.lifecycle("Generated hash for ${apkFile.name}")
                     }
-
-                    headerDir.resolve("expected_hash.h").writeText("""
-                        // Auto-generated - DO NOT EDIT
-                        #pragma once
-                        const char* EXPECTED_APK_HASH = "${hash.toString().trim()}";
-                    """.trimIndent())
-
-                    logger.lifecycle("Generated hash for ${apkFile.asFile.name}: ${hash.toString().trim()}")
                 }
             }
         }
     }
 }
+
 
 dependencies {
     implementation(libs.androidx.core.ktx)

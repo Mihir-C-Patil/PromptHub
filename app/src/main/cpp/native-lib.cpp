@@ -5,11 +5,12 @@
 #include "openssl/err.h"
 #include "openssl/sha.h"
 #include <android/log.h>
+#include "generated/expected_hash.h"
 
 #define LOG_TAG "OpenSSL_Native"
 #define LOG_ERROR(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 #define LOG_INFO(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
-const char* EXPECTED_APK_HASH = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
+//const char* EXPECTED_APK_HASH = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
 
 // Helper to throw Java exceptions from native code
 void throwJavaException(JNIEnv* env, const char* msg) {
