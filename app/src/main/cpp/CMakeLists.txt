@@ -8,6 +8,7 @@ add_library(
 
 find_library(log-lib log)
 include_directories(src/main/cpp)
+include_directories(src/main/cpp/generated)
 
 target_link_libraries(
         native-lib

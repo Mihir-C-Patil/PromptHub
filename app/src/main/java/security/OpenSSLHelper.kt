@@ -1,5 +1,6 @@
 package com.example.prompthub.security
 
+import android.content.Context
 import android.util.Log
 
 class OpenSSLHelper {
@@ -35,3 +36,17 @@ fun logOpenSSLInfo() {
 
 // Extension function for byte array to hex
 fun ByteArray.toHex(): String = joinToString("") { "%02x".format(it) }
+
+class TamperCheck {
+    companion object {
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
+
+    external fun verifyApkHash(apkPath: String): Boolean
+
+    fun isAppUntampered(context: Context): Boolean {
+        return verifyApkHash(context.packageResourcePath)
+    }
+}

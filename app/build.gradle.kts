@@ -1,10 +1,9 @@
 import com.android.build.api.dsl.Packaging
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import org.gradle.api.Project
+import org.gradle.api.file.RegularFile
+import org.gradle.api.tasks.Exec
 import java.io.ByteArrayOutputStream
-import javax.inject.Inject
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.TaskAction
-import org.gradle.process.ExecOperations
-import org.gradle.api.tasks.Internal
 
 plugins {
     alias(libs.plugins.android.application)
@@ -73,6 +72,39 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    applicationVariants.all {
+        // Only for release builds
+        if (buildType.name == "release") {
+            assembleProvider?.configure {
+                doLast {
+                    val apkFile: RegularFile? = outputs.first().outputFile
+                    if (apkFile == null || !apkFile.asFile.exists()) {
+                        throw GradleException("APK file not found!")
+                    }
+
+                    val headerDir = projectDir.resolve("src/main/cpp/generated/").also { it.mkdirs() }
+                    val hash = ByteArrayOutputStream()
+
+                    project.exec {
+                        if (System.getProperty("os.name").contains("Windows", ignoreCase = true)) {
+                            commandLine("cmd", "/c", "certutil -hashfile \"${apkFile.asFile.absolutePath}\" SHA256 | find /v \"hashfile\"")
+                        } else {
+                            commandLine("sh", "-c", "openssl dgst -sha256 \"${apkFile.asFile.absolutePath}\" | awk '{print \$2}'")
+                        }
+                        standardOutput = hash
+                    }
+
+                    headerDir.resolve("expected_hash.h").writeText("""
+                        // Auto-generated - DO NOT EDIT
+                        #pragma once
+                        const char* EXPECTED_APK_HASH = "${hash.toString().trim()}";
+                    """.trimIndent())
+
+                    logger.lifecycle("Generated hash for ${apkFile.asFile.name}: ${hash.toString().trim()}")
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -104,56 +136,3 @@ dependencies {
     // Image Loading (Coil)
     implementation(libs.coil)
 }
-
-abstract class PrintSigningCertSha256Task @Inject constructor(
-    private val execOperations: ExecOperations
-) : DefaultTask() {
-
-    @TaskAction
-    fun printSha256() {
-        val signingConfig = project.extensions
-            .findByName("android")
-            ?.let { it as? com.android.build.gradle.AppExtension }
-            ?.signingConfigs
-            ?.findByName("release")
-
-        if (signingConfig == null) {
-            println("❌ Release signing config not found.")
-            return
-        }
-
-        val keystoreFile = signingConfig.storeFile
-        val keyAlias = signingConfig.keyAlias
-        val keyPassword = signingConfig.storePassword
-
-        if (keystoreFile == null || keyAlias == null || keyPassword == null) {
-            println("❌ Keystore information is incomplete.")
-            return
-        }
-
-        val outputStream = ByteArrayOutputStream()
-
-        execOperations.exec {
-            commandLine(
-                "keytool", "-list", "-v",
-                "-keystore", keystoreFile.absolutePath,
-                "-alias", keyAlias,
-                "-storepass", keyPassword
-            )
-            standardOutput = outputStream
-        }
-
-        val output = outputStream.toString()
-        val regex = Regex("SHA256:\\s*([A-Fa-f0-9:]+)")
-        val match = regex.find(output)
-
-        if (match != null) {
-            val sha256 = match.groupValues[1].replace(":", "").uppercase()
-            println("\n✅ SHA-256 fingerprint: $sha256\n")
-        } else {
-            println("\n❌ Could not extract SHA-256\n")
-        }
-    }
-}
-
-tasks.register("printSigningCertSha256", PrintSigningCertSha256Task::class)
