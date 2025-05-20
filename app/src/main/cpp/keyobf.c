@@ -8,7 +8,6 @@ static unsigned char obfuscatedStorage[OBFUSCATED_STORAGE_SIZE];
 static void store_real_value(int storage_index, int real_value) {
     obfuscatedStorage[storage_index] = real_value;
 }
-})
 
 JNIEXPORT void JNICALL
 Java_com_example_prompthub_utils_KeyLoader_f0(JNIEnv
