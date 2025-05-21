@@ -152,7 +152,7 @@ class ImageGenerationFragment : Fragment() {
                 put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/Prompthub")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/PromptHub")
                 }
             }
 
