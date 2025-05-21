@@ -1,16 +1,19 @@
+#include "keyobf_header.h"
 #include <jni.h>
 #include <string.h>
 
 #define OBFUSCATED_STORAGE_SIZE 600
 #define REAL_VALUE_SIZE 172
 
-static unsigned char obfuscatedStorage[OBFUSCATED_STORAGE_SIZE];
+unsigned char obfuscatedStorage[OBFUSCATED_STORAGE_SIZE];
 
-static int real_indices[REAL_VALUE_SIZE];
+int real_indices[REAL_VALUE_SIZE];
 
 static void store_real_value(int storage_index, int real_value) {
     obfuscatedStorage[storage_index] = real_value;
-    real_indices[real_value] = storage_index;
+    int real_index = 0;
+    real_indices[real_index] = storage_index;
+    real_index++;
 }
 
 static void store_fake_value(int storage_index, int fake_value) {

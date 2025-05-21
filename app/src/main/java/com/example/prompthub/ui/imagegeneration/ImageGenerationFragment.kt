@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.prompthub.R
 import com.example.prompthub.data.api.ApiService
+import com.example.prompthub.utils.KeyLoader
 import com.example.prompthub.data.api.RetrofitClient
 import com.example.prompthub.ui.viewmodel.ImageViewModel
 import com.example.prompthub.ui.viewmodel.ImageViewModelFactory
@@ -78,6 +79,7 @@ class ImageGenerationFragment : Fragment() {
         generateButton.setOnClickListener {
             val prompt = promptEditText.text.toString()
             if (prompt.isNotEmpty()) {
+                KeyLoader.retrievePlaintextAuthHeader()
                 viewModel.generateImageUrl(prompt)
             } else {
                 Toast.makeText(
