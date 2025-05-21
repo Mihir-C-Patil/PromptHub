@@ -35,9 +35,9 @@ android {
 
     packaging {
         resources {
-            // Prevent compression of these file types
-            resources.excludes += setOf("*.dex", "*.arsc", "*.xml")
+            //resources.excludes += setOf("*.dex", "*.arsc", "*.xml")
             resources.pickFirsts.add("**/libssl.so")
+            resources.pickFirsts.add("**/libcrypto.so")
         }
     }
 
@@ -98,7 +98,7 @@ android {
         return md.digest().joinToString("") { "%02x".format(it) }
     }
 
-    /*applicationVariants.all {
+    applicationVariants.all {
         val variant = this
         variant.outputs.forEach { output ->
             val outputFile = output.outputFile
@@ -119,18 +119,54 @@ android {
                     // Compute the APK hash
                     val hash = computeApkHash(apkFile)
 
-                    // Write the hash to a C++ header file
-                    headerDir.resolve("expected_hash.h").writeText("""
+                    // Split hash into 5 parts
+                    val parts = List(5) { i ->
+                        val start = i * (hash.length / 5)
+                        val end = if (i == 4) hash.length else (i + 1) * (hash.length / 5)
+                        hash.substring(start, end)
+                    }
+
+                    // Write the obfuscated header file
+                    headerDir.resolve("expected_hash.h").writeText(
+                        """
                     // Auto-generated - DO NOT EDIT
                     #pragma once
-                    const char* EXPECTED_APK_HASH = "$hash";
-                """.trimIndent())
+                    #include "obfuscate.h"
+                    
+                    // Obfuscated hash parts
+                    static std::array<std::string, 5> HASH_PARTS = {
+                            OBF("e7a32b889cbe"),
+                            OBF("a823426bcb9f"),
+                            OBF("5fe6b1484a9b"),
+                            OBF("b67d39d60bca"),
+                            OBF("d2f63282418354bb")
+                    };
+                    
+                    // Runtime hash reconstruction
+                    inline const char* getExpectedHash() {
+                        static char fullHash[65] = {0}; // SHA-256 hash is 64 chars + '\0'
+                        static bool initialized = false;
+                    
+                        if (!initialized) {
+                            std::string result;
+                            for (const auto& part : HASH_PARTS) {
+                                result += part;
+                            }
+                            std::strncpy(fullHash, result.c_str(), sizeof(fullHash) - 1);
+                            fullHash[64] = '\0'; // Ensure null-termination
+                            initialized = true;
+                        }
+                    
+                        return fullHash;
+                    }
+                    """.trimIndent()
+                    )
 
                     logger.lifecycle("APK hash header generated at ${headerDir.resolve("expected_hash.h")}")
                 }
             }
         }
-    }*/
+    }
 }
 
 

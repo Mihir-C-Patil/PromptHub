@@ -1,21 +1,16 @@
 #include <jni.h>
 #include <string>
 #include <vector>
-#include "openssl/evp.h"
 #include "openssl/ssl.h"
-#include "openssl/err.h"
-#include "openssl/sha.h"
 #include <android/log.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
-#include <dirent.h>
-#include <sys/stat.h>
 #include "generated/expected_hash.h"
 
 #define LOG_TAG "TamperCheck"
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
-//const char* EXPECTED_APK_HASH = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
+const char* EXPECTED_APK_HASH = getExpectedHash();
 
 // Helper to throw Java exceptions from native code
 void throwJavaException(JNIEnv* env, const char* msg) {
@@ -105,7 +100,6 @@ void hash_res_directory(AAssetManager* mgr, SHA256_CTX* sha_ctx, const std::stri
     }
 
     const char* filename;
-    LOGD("test 1");
     while ((filename = AAssetDir_getNextFileName(assetDir)) != nullptr) {
         std::string fullPath = path + "/" + filename;
 
@@ -113,18 +107,15 @@ void hash_res_directory(AAssetManager* mgr, SHA256_CTX* sha_ctx, const std::stri
         if (AAsset* dirTest = AAssetManager_open(mgr, (fullPath + "/.keep").c_str(), AASSET_MODE_UNKNOWN)) {
             AAsset_close(dirTest);
             hash_res_directory(mgr, sha_ctx, fullPath);
-            LOGD("test 2");
             continue;
         }
 
         auto data = read_asset(mgr, fullPath.c_str());
-        //if (data.empty()) {
+        if (data.empty()) {
             SHA256_Update(sha_ctx, data.data(), data.size());
             LOGD("Hashed res file: %s (%zu bytes)", fullPath.c_str(), data.size());
-            LOGD("test 3");
-        //}
+        }
     }
-    LOGD("test 4");
     AAssetDir_close(assetDir);
 }
 
@@ -187,5 +178,31 @@ Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
         LOGE("Actual:   %s", computedHash);
     }
 
+    return match;
+}
+
+extern "C" JNIEXPORT jboolean JNICALL
+Java_com_example_prompthub_security_TamperCheck2_verifyApkHash2(
+        JNIEnv* env, jobject thiz, jstring computedHashJava) {
+
+    const char* computedHash = env->GetStringUTFChars(computedHashJava, nullptr);
+    if (computedHash == nullptr) {
+        LOGE("Failed to get computed hash string");
+        return false;
+    }
+
+    // Constant-time comparison
+    bool match = true;
+    for (int i = 0; i < 64; i++) { // SHA-256 is 64 hex chars
+        match &= (computedHash[i] == EXPECTED_APK_HASH[i]);
+    }
+
+    if (!match) {
+        LOGE("APK HASH MISMATCH! Possible tampering detected");
+        LOGE("Expected: %s", EXPECTED_APK_HASH);
+        LOGE("Actual:   %s", computedHash);
+    }
+
+    env->ReleaseStringUTFChars(computedHashJava, computedHash);
     return match;
 }

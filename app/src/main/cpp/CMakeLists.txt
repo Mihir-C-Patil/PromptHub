@@ -5,8 +5,6 @@ project("prompthub")
 find_library(log-lib log)
 find_library(z-lib z)     # Required for compression
 
-
-
 add_library(
         native-lib
         SHARED
