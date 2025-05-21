@@ -1,15 +1,20 @@
 #include <jni.h>
 #include <string>
+#include <vector>
 #include "openssl/evp.h"
 #include "openssl/ssl.h"
 #include "openssl/err.h"
 #include "openssl/sha.h"
 #include <android/log.h>
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
+#include <dirent.h>
+#include <sys/stat.h>
 #include "generated/expected_hash.h"
 
-#define LOG_TAG "OpenSSL_Native"
-#define LOG_ERROR(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
-#define LOG_INFO(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOG_TAG "TamperCheck"
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 //const char* EXPECTED_APK_HASH = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
 
 // Helper to throw Java exceptions from native code
@@ -62,45 +67,125 @@ Java_com_example_prompthub_security_OpenSSLHelper_sha256(
     return nullptr;
 }
 
+// Helper to compute SHA-256 hash
+std::string compute_sha256(const std::vector<uint8_t>& data) {
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_CTX sha256;
+    SHA256_Init(&sha256);
+    SHA256_Update(&sha256, data.data(), data.size());
+    SHA256_Final(hash, &sha256);
+
+    std::string hashStr;
+    for (unsigned char i : hash) {
+        char buf[3];
+        snprintf(buf, sizeof(buf), "%02x", i);
+        hashStr += buf;
+    }
+    return hashStr;
+}
+
+// Read file from assets
+std::vector<uint8_t> read_asset(AAssetManager* mgr, const char* filename) {
+    AAsset* asset = AAssetManager_open(mgr, filename, AASSET_MODE_BUFFER);
+    if (!asset) return {};
+
+    size_t size = AAsset_getLength(asset);
+    std::vector<uint8_t> buffer(size);
+    AAsset_read(asset, buffer.data(), size);
+    AAsset_close(asset);
+    return buffer;
+}
+
+// Helper to list files in assets/res/
+void hash_res_directory(AAssetManager* mgr, SHA256_CTX* sha_ctx, const std::string& path) {
+    AAssetDir* assetDir = AAssetManager_openDir(mgr, path.c_str());
+    if (!assetDir) {
+        LOGD("No directory %s found in assets", path.c_str());
+        return;
+    }
+
+    const char* filename;
+    LOGD("test 1");
+    while ((filename = AAssetDir_getNextFileName(assetDir)) != nullptr) {
+        std::string fullPath = path + "/" + filename;
+
+        // Recursively handle directories
+        if (AAsset* dirTest = AAssetManager_open(mgr, (fullPath + "/.keep").c_str(), AASSET_MODE_UNKNOWN)) {
+            AAsset_close(dirTest);
+            hash_res_directory(mgr, sha_ctx, fullPath);
+            LOGD("test 2");
+            continue;
+        }
+
+        auto data = read_asset(mgr, fullPath.c_str());
+        //if (data.empty()) {
+            SHA256_Update(sha_ctx, data.data(), data.size());
+            LOGD("Hashed res file: %s (%zu bytes)", fullPath.c_str(), data.size());
+            LOGD("test 3");
+        //}
+    }
+    LOGD("test 4");
+    AAssetDir_close(assetDir);
+}
+
 //Get APK Path in C++
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_example_prompthub_security_TamperCheck_verifyApkHash(
-        JNIEnv* env,
-        jobject thiz,
-        jstring apkPath) {
-
-    const char* path = env->GetStringUTFChars(apkPath, NULL);
-    FILE* apkFile = fopen(path, "rb");
-
-    if (!apkFile) {
-        __android_log_write(ANDROID_LOG_ERROR, "SECURITY", "Failed to open APK");
-        return JNI_FALSE;
+Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
+    JNIEnv* env, jobject thiz, jobject assetManager) {
+    AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
+    if (!mgr) {
+        LOGE("Failed to get AssetManager");
+        return false;
     }
-    // Compute SHA-256
+
     SHA256_CTX sha256;
     SHA256_Init(&sha256);
 
-    unsigned char buffer[4096];
-    size_t bytesRead;
-    while ((bytesRead = fread(buffer, 1, 4096, apkFile))) {
-        SHA256_Update(&sha256, buffer, bytesRead);
+    // Core files
+    const char* core_files[] = {
+            "classes.dex",
+            "resources.arsc",
+            "AndroidManifest.xml",
+            nullptr
+    };
+
+    // Hash core files
+    for (int i = 0; core_files[i]; i++) {
+        auto data = read_asset(mgr, core_files[i]);
+        if (data.empty()) {
+            SHA256_Update(&sha256, data.data(), data.size());
+            LOGD("Hashed core file: %s (%zu bytes)", core_files[i], data.size());
+        }
     }
 
-    unsigned char actualHash[SHA256_DIGEST_LENGTH];
-    SHA256_Final(actualHash, &sha256);
-    fclose(apkFile);
+    // Hash all res/ files recursively
+    hash_res_directory(mgr, &sha256, "res");
 
-    // Convert expected hash from hex to binary
-    unsigned char expectedHashBin[SHA256_DIGEST_LENGTH];
+    // Finalize hash
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_Final(hash, &sha256);
+
+    // Convert to hex
+    char computedHash[SHA256_DIGEST_LENGTH*2 + 1];
     for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
-        sscanf(EXPECTED_APK_HASH + 2*i, "%02hhx", &expectedHashBin[i]);
+        sprintf(computedHash + i*2, "%02x", hash[i]);
     }
 
-    // Compare
-    int mismatch = memcmp(actualHash, expectedHashBin, SHA256_DIGEST_LENGTH);
+    // Debug output
+    LOGD("Expected hash: %s", EXPECTED_APK_HASH);
+    LOGD("Computed hash: %s", computedHash);
 
-    __android_log_print(ANDROID_LOG_INFO, "SECURITY",
-                        "Hash match: %s", mismatch ? "NO" : "YES");
+    // Constant-time comparison
+    bool match = true;
+    for (int i = 0; i < SHA256_DIGEST_LENGTH*2; i++) {
+        match &= (EXPECTED_APK_HASH[i] == computedHash[i]);
+    }
 
-    return mismatch ? JNI_FALSE : JNI_TRUE;
+    if (!match) {
+        LOGE("HASH MISMATCH! Possible tampering detected");
+        LOGE("Expected: %s", EXPECTED_APK_HASH);
+        LOGE("Actual:   %s", computedHash);
+    }
+
+    return match;
 }

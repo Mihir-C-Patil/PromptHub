@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.example.prompthub.R
 import com.example.prompthub.security.OpenSSLHelper
 import com.example.prompthub.security.logOpenSSLInfo
+import com.example.prompthub.security.logTamperCheckInfo
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Simple test
         logOpenSSLInfo()
+        logTamperCheckInfo(this)
 
         // Display on screen
         //findViewById<TextView>(R.id.text_view).text = sslVersion

@@ -4,6 +4,8 @@ import org.gradle.api.Project
 import org.gradle.api.file.RegularFile
 import org.gradle.api.tasks.Exec
 import java.io.ByteArrayOutputStream
+import java.security.MessageDigest
+import java.util.zip.ZipFile
 
 plugins {
     alias(libs.plugins.android.application)
@@ -31,9 +33,12 @@ android {
 
     }
 
-    fun Packaging.() {
-        resources.pickFirsts.add("**/libssl.so")
-        resources.pickFirsts.add("**/libssl.so")
+    packaging {
+        resources {
+            // Prevent compression of these file types
+            resources.excludes += setOf("*.dex", "*.arsc", "*.xml")
+            resources.pickFirsts.add("**/libssl.so")
+        }
     }
 
     externalNativeBuild {
@@ -72,64 +77,60 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    applicationVariants.all {
-        val variant = this
-        if (variant.buildType.name == "release") {
-            variant.outputs.forEach { output ->
-                val outputFile = output.outputFile
-                if ((outputFile != null) && outputFile.name.endsWith(".apk")) {
-                    val assembleTask = variant.assembleProvider.get()
-                    assembleTask.doLast {
-                        val apkFile = outputFile
 
-                        if (!apkFile.exists()) {
-                            logger.error("APK not found at: ${apkFile.absolutePath}")
-                            return@doLast
+    fun computeApkHash(apkFile: File): String {
+        val md = MessageDigest.getInstance("SHA-256")
+        ZipFile(apkFile).use { zip ->
+            zip.entries().toList()
+                .filter { it.name.matches(Regex("classes.dex|resources.arsc|AndroidManifest.xml|res/.*")) }
+                .sortedBy { it.name }
+                .forEach { entry ->
+                    // Hash the compressed bytes (no need for compressedSize)
+                    zip.getInputStream(entry).use { input ->
+                        val buffer = ByteArray(8192)
+                        var bytesRead: Int
+                        while (input.read(buffer).also { bytesRead = it } != -1) {
+                            md.update(buffer, 0, bytesRead)
                         }
-
-                        val headerDir = projectDir.resolve("src/main/cpp/generated/").apply {
-                            mkdirs()
-                        }
-                        val hashStream = ByteArrayOutputStream()
-
-                        project.exec {
-                            if (System.getProperty("os.name", "").contains("Windows", true)) {
-                                commandLine(
-                                    "cmd", "/c",
-                                    "certutil -hashfile \"${outputFile.absolutePath}\" SHA256 | find /v \"hashfile\" | find /v \"CertUtil\""
-                                )
-                            } else {
-                                commandLine(
-                                    "sh", "-c",
-                                    "openssl dgst -sha256 \"${outputFile.absolutePath}\" | awk '{print \$2}'"
-                                )
-                            }
-                            standardOutput = hashStream
-                        }
-
-                        // Process output to get just the hash
-                        val rawOutput = hashStream.toString().trim()
-                        val hash = if (System.getProperty("os.name", "").contains("Windows", true)) {
-                            // For Windows: Take last line and remove any non-hex characters
-                            rawOutput.lines().last()
-                                .replace("[^a-fA-F0-9]".toRegex(), "")
-                        } else {
-                            // For Unix: Already clean output
-                            rawOutput
-                        }
-
-                        headerDir.resolve("expected_hash.h").writeText("""
-                            // Auto-generated - DO NOT EDIT
-                            #pragma once
-                            const char* EXPECTED_APK_HASH = "$hash";
-                        """.trimIndent())
-
-                        logger.lifecycle("Generated hash for ${apkFile.name}")
                     }
+                }
+        }
+        return md.digest().joinToString("") { "%02x".format(it) }
+    }
+
+    /*applicationVariants.all {
+        val variant = this
+        variant.outputs.forEach { output ->
+            val outputFile = output.outputFile
+            if ((outputFile != null) && outputFile.name.endsWith(".apk")) {
+                val assembleTask = variant.assembleProvider.get()
+                assembleTask.doLast {
+                    val apkFile = outputFile
+
+                    if (!apkFile.exists()) {
+                        logger.error("APK not found at: ${apkFile.absolutePath}")
+                        return@doLast
+                    }
+
+                    val headerDir = projectDir.resolve("src/main/cpp/generated/").apply {
+                        mkdirs()
+                    }
+
+                    // Compute the APK hash
+                    val hash = computeApkHash(apkFile)
+
+                    // Write the hash to a C++ header file
+                    headerDir.resolve("expected_hash.h").writeText("""
+                    // Auto-generated - DO NOT EDIT
+                    #pragma once
+                    const char* EXPECTED_APK_HASH = "$hash";
+                """.trimIndent())
+
+                    logger.lifecycle("APK hash header generated at ${headerDir.resolve("expected_hash.h")}")
                 }
             }
         }
-    }
+    }*/
 }
 
 

@@ -1,6 +1,7 @@
 package com.example.prompthub.security
 
 import android.content.Context
+import android.content.res.AssetManager
 import android.util.Log
 
 class OpenSSLHelper {
@@ -44,9 +45,26 @@ class TamperCheck {
         }
     }
 
-    external fun verifyApkHash(apkPath: String): Boolean
+    fun verifyApkHash(context: Context): Boolean {
+        return try {
+            nativeVerifyApkHash(context.assets)
+        } catch (e: Exception) {
+            false
+        }
+    }
 
-    fun isAppUntampered(context: Context): Boolean {
-        return verifyApkHash(context.packageResourcePath)
+    private external fun nativeVerifyApkHash(assetManager: AssetManager): Boolean
+}
+
+fun logTamperCheckInfo(context: Context) {
+    try {
+        val tamperCheck = TamperCheck()
+        
+        // Verify APK hash and log the result
+        val isUntampered = tamperCheck.verifyApkHash(context)
+        Log.d("TamperCheck", "APK Hash Verification Result: ${if (isUntampered) "Untampered" else "Tampered"}")
+        
+    } catch (e: Exception) {
+        Log.e("TamperCheck", "Error during APK hash verification: ${e.message}")
     }
 }
