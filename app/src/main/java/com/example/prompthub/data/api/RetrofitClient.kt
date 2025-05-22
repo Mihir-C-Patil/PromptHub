@@ -22,26 +22,24 @@ object RetrofitClient {
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    // Strict certificate verification
-    private val trustManager = object : X509TrustManager {
-        override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+    private class CustomTrustManager : X509TrustManager {
+        @Throws(CertificateException::class)
+        override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
             throw CertificateException("Client certificates not supported")
         }
-        
-        override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-            if (chain == null || chain.isEmpty()) {
+
+        @Throws(CertificateException::class)
+        override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+            if (chain.isEmpty()) {
                 throw CertificateException("No certificates in chain")
             }
 
-            // Get the end-entity certificate
             val endEntityCert = chain[0]
             
-            // Verify the certificate details
             if (!endEntityCert.subjectDN.name.contains("elliottwen.info")) {
                 throw CertificateException("Invalid certificate subject: ${endEntityCert.subjectDN}")
             }
 
-            // Check if certificate is expired
             val now = System.currentTimeMillis()
             if (now > endEntityCert.notAfter.time) {
                 throw CertificateException("Certificate expired on ${endEntityCert.notAfter}")
@@ -55,9 +53,13 @@ object RetrofitClient {
             Log.d(TAG, "Issuer: ${endEntityCert.issuerDN}")
             Log.d(TAG, "Valid until: ${endEntityCert.notAfter}")
         }
-        
-        override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+
+        override fun getAcceptedIssuers(): Array<X509Certificate> {
+            return emptyArray()
+        }
     }
+
+    private val trustManager = CustomTrustManager()
 
     private val sslContext = SSLContext.getInstance("TLS").apply {
         init(null, arrayOf<TrustManager>(trustManager), null)
@@ -68,7 +70,6 @@ object RetrofitClient {
         val request = chain.request()
         val response = chain.proceed(request)
         
-        // Log SSL/TLS information
         val handshake = response.handshake
         if (handshake != null) {
             Log.d(TAG, "SSL/TLS Connection Status:")
