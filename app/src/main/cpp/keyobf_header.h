@@ -36,4 +36,4 @@ Java_com_example_prompthub_utils_KeyLoader_f7(JNIEnv *env, jobject thiz);
 JNIEXPORT void JNICALL
 Java_com_example_prompthub_utils_KeyLoader_f8(JNIEnv *env, jobject thiz);
 
-#endif //PROMPTHUB_KEYOBF_H
+#endif

@@ -51,6 +51,7 @@ object KeyLoader {
 
             // Step 2: Retrieve the assembled Base64 key from C
             val base64EncodedKey = getObfuscatedAuthHeader()
+            Log.d("KeyLoader", "Base64 Encoded Key from C: $base64EncodedKey")
 
             if (base64EncodedKey.isEmpty()) {
                 Log.e("KeyLoader", "Retrieved Base64 key from native code is empty.")

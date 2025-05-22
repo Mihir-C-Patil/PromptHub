@@ -9,9 +9,10 @@ unsigned char obfuscatedStorage[OBFUSCATED_STORAGE_SIZE];
 
 int real_indices[REAL_VALUE_SIZE];
 
+int real_index = 0;
+
 static void store_real_value(int storage_index, int real_value) {
     obfuscatedStorage[storage_index] = real_value;
-    int real_index = 0;
     real_indices[real_index] = storage_index;
     real_index++;
 }
