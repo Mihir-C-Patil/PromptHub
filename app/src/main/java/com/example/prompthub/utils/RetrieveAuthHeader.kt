@@ -1,6 +1,5 @@
 package com.example.prompthub.utils
 
-import com.example.prompthub.utils.base64
 import android.util.Log
 import java.nio.charset.StandardCharsets
 
@@ -43,7 +42,7 @@ object KeyLoader {
                 return null
             }
 
-            val decodedBytes = base64.decode(base64EncodedKey)
+            val decodedBytes = test.decode(base64EncodedKey)
             val plaintextHeader = String(decodedBytes, StandardCharsets.UTF_8)
 
             plaintextHeader

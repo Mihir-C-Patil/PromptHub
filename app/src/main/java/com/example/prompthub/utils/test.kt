@@ -1,6 +1,6 @@
 package com.example.prompthub.utils
 
-object base64 {
+object test {
     private val base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
     private val base64Inv = IntArray(256) { -1 }.apply {
         for (i in base64Chars.indices) {
