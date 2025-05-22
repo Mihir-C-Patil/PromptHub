@@ -14,27 +14,46 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 import java.security.cert.X509Certificate
+import java.security.cert.CertificateException
 
 object RetrofitClient {
     private const val TAG = "RetrofitClient"
     private const val BASE_URL = "https://ai.elliottwen.info/"
-    private const val MAX_RETRIES = 3
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    // SSL Configuration
+    // Strict certificate verification
     private val trustManager = object : X509TrustManager {
         override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-            Log.d(TAG, "Client certificate check: $authType")
+            throw CertificateException("Client certificates not supported")
         }
         
         override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-            Log.d(TAG, "Server certificate check: $authType")
-            chain?.forEach { cert ->
-                Log.d(TAG, "Certificate: ${cert.subjectDN}")
-                Log.d(TAG, "Issuer: ${cert.issuerDN}")
-                Log.d(TAG, "Valid until: ${cert.notAfter}")
+            if (chain == null || chain.isEmpty()) {
+                throw CertificateException("No certificates in chain")
             }
+
+            // Get the end-entity certificate
+            val endEntityCert = chain[0]
+            
+            // Verify the certificate details
+            if (!endEntityCert.subjectDN.name.contains("elliottwen.info")) {
+                throw CertificateException("Invalid certificate subject: ${endEntityCert.subjectDN}")
+            }
+
+            // Check if certificate is expired
+            val now = System.currentTimeMillis()
+            if (now > endEntityCert.notAfter.time) {
+                throw CertificateException("Certificate expired on ${endEntityCert.notAfter}")
+            }
+            if (now < endEntityCert.notBefore.time) {
+                throw CertificateException("Certificate not valid until ${endEntityCert.notBefore}")
+            }
+
+            Log.d(TAG, "Certificate verification successful:")
+            Log.d(TAG, "Subject: ${endEntityCert.subjectDN}")
+            Log.d(TAG, "Issuer: ${endEntityCert.issuerDN}")
+            Log.d(TAG, "Valid until: ${endEntityCert.notAfter}")
         }
         
         override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
@@ -42,7 +61,7 @@ object RetrofitClient {
 
     private val sslContext = SSLContext.getInstance("TLS").apply {
         init(null, arrayOf<TrustManager>(trustManager), null)
-        Log.d(TAG, "SSL Context initialized with protocol: ${protocol}")
+        Log.d(TAG, "SSL Context initialized with strict certificate verification")
     }
 
     private val sslLogger = Interceptor { chain ->
@@ -61,27 +80,6 @@ object RetrofitClient {
         response
     }
 
-    private val retryInterceptor = Interceptor { chain ->
-        var retryCount = 0
-        var response: Response? = null
-        
-        while (retryCount < MAX_RETRIES && (response == null || !response.isSuccessful)) {
-            try {
-                response = chain.proceed(chain.request())
-                if (response.isSuccessful) {
-                    return@Interceptor response
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "Request failed: ${e.message}")
-            }
-            retryCount++
-            if (retryCount < MAX_RETRIES) {
-                Thread.sleep(1000L * retryCount) // Exponential backoff
-            }
-        }
-        response ?: throw Exception("Failed after $MAX_RETRIES retries")
-    }
-
     private val protocolLogger = Interceptor { chain ->
         val request = chain.request()
         val response = chain.proceed(request)
@@ -97,7 +95,6 @@ object RetrofitClient {
         .writeTimeout(30, TimeUnit.SECONDS)
         .sslSocketFactory(sslContext.socketFactory, trustManager)
         .addInterceptor(sslLogger)
-        .addInterceptor(retryInterceptor)
         .addInterceptor(protocolLogger)
         .build()
 
