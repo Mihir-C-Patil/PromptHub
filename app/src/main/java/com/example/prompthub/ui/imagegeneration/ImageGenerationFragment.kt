@@ -41,7 +41,10 @@ class ImageGenerationFragment : Fragment() {
 
     private lateinit var viewModel: ImageViewModel
 
-    private val AUTH_HEADER = "your_actual_auth_header"
+    private val AUTH_HEADER: String by lazy {
+        KeyLoader.retrievePlaintextAuthHeader()
+            ?: throw IllegalStateException("Auth header is missing!")
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
