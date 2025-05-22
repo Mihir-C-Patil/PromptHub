@@ -1,4 +1,4 @@
-package com.example.prompthub.utils // Ensure this matches your C JNI function names
+package com.example.prompthub.utils
 
 import com.example.prompthub.utils.base64
 import android.util.Log
@@ -20,24 +20,10 @@ object KeyLoader {
     external fun f7()
     external fun f8()
 
-    // --- Declare the native function to retrieve the Base64 encoded key ---
-    private external fun getObfuscatedAuthHeader(): String // Renamed to avoid confusion with the public method
+    private external fun getObfuscatedAuthHeader(): String
 
-    /**
-     * Retrieves the plaintext authentication header.
-     *
-     * This function calls the native C code to:
-     * 1. Initialize the obfuscated key storage by calling f0-f8.
-     * 2. Reconstruct the Base64 encoded key string via getObfuscatedAuthHeaderInternal.
-     * Then, this Kotlin function decodes the Base64 string to get the plaintext header.
-     *
-     * @return The plaintext authentication header string, or null if an error occurs.
-     */
     fun retrievePlaintextAuthHeader(): String? {
         return try {
-            // Step 1: Populate the C-side storage by calling f0-f8
-            // The order might matter depending on your obfuscation logic.
-            Log.d("KeyLoader", "Initializing native key storage...")
             f0()
             f1()
             f2()
@@ -47,28 +33,19 @@ object KeyLoader {
             f6()
             f7()
             f8()
-            Log.d("KeyLoader", "Native key storage initialized.")
 
-            // Step 2: Retrieve the assembled Base64 key from C
             val base64EncodedKey = getObfuscatedAuthHeader()
-            Log.d("KeyLoader", "Base64 Encoded Key from C: $base64EncodedKey")
 
             if (base64EncodedKey.isEmpty()) {
-                Log.e("KeyLoader", "Retrieved Base64 key from native code is empty.")
                 return null
             }
-            if (base64EncodedKey.startsWith("Error:")) { // Check for errors from C
-                Log.e("KeyLoader", "Native code error: $base64EncodedKey")
+            if (base64EncodedKey.startsWith("Error:")) {
                 return null
             }
-
-
-            Log.d("KeyLoader", "Base64 Encoded Key from C: $base64EncodedKey")
 
             val decodedBytes = base64.decode(base64EncodedKey)
             val plaintextHeader = String(decodedBytes, StandardCharsets.UTF_8)
 
-            Log.d("KeyLoader", "Plaintext Auth Header: $plaintextHeader")
             plaintextHeader
         } catch (e: UnsatisfiedLinkError) {
             Log.e("KeyLoader", "Native method not found. Ensure library is loaded, method names match, and NDK is configured.", e)
