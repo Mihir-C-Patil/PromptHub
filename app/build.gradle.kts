@@ -135,11 +135,11 @@ android {
                     
                     // Obfuscated hash parts
                     static std::array<std::string, 5> HASH_PARTS = {
-                            OBF("e7a32b889cbe"),
-                            OBF("a823426bcb9f"),
-                            OBF("5fe6b1484a9b"),
-                            OBF("b67d39d60bca"),
-                            OBF("d2f63282418354bb")
+                            OBF("${parts[0]}"),
+                            OBF("${parts[1]}"),
+                            OBF("${parts[2]}"),
+                            OBF("${parts[3]}"),
+                            OBF("${parts[4]}")
                     };
                     
                     // Runtime hash reconstruction
