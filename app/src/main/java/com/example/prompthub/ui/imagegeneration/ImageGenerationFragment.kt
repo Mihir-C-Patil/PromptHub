@@ -18,17 +18,16 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.prompthub.R
-import com.example.prompthub.data.api.ApiService
-import com.example.prompthub.utils.KeyLoader
 import com.example.prompthub.data.api.RetrofitClient
 import com.example.prompthub.ui.viewmodel.ImageViewModel
 import com.example.prompthub.ui.viewmodel.ImageViewModelFactory
+import com.example.prompthub.utils.KeyLoader
+import com.example.prompthub.utils.ObfuscationHelper
 import java.io.OutputStream
 
 class ImageGenerationFragment : Fragment() {
@@ -42,7 +41,7 @@ class ImageGenerationFragment : Fragment() {
     private lateinit var viewModel: ImageViewModel
 
     private val AUTH_HEADER: String by lazy {
-        KeyLoader.retrievePlaintextAuthHeader()
+        ObfuscationHelper.retrieveAuthHeader()
             ?: throw IllegalStateException("Auth header is missing!")
     }
 
@@ -82,7 +81,6 @@ class ImageGenerationFragment : Fragment() {
         generateButton.setOnClickListener {
             val prompt = promptEditText.text.toString()
             if (prompt.isNotEmpty()) {
-                KeyLoader.retrievePlaintextAuthHeader()
                 viewModel.generateImageUrl(prompt)
             } else {
                 Toast.makeText(

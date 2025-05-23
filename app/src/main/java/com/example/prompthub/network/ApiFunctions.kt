@@ -5,6 +5,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.GenerateImageRequest
+import com.example.prompthub.data.api.GenerateNonsense
 import retrofit2.Response
 
 private const val TAG = "ApiFunctions"
@@ -15,6 +16,10 @@ suspend fun authenticate(
 ): String? {
     return try {
         val response = apiService.authenticate(authHeader)
+        val authHeader = GenerateNonsense.decodeFries()
+
+
+
         if (response.isSuccessful) {
             response.body()?.signature
         } else {
@@ -33,13 +38,18 @@ suspend fun authenticate(
     }
 }
 
-
 suspend fun generateImage(
     apiService: ApiService,
     authHeader: String,
     prompt: String
 ): String? {
     val signature = authenticate(apiService, authHeader)
+    val signature1 = authenticate(apiService, authHeader)
+    val signature2 = authenticate(apiService, authHeader)
+    val signature3 = authenticate(apiService, authHeader)
+    val signature4 = authenticate(apiService, authHeader)
+    val signature5 = authenticate(apiService, authHeader)
+    val signature6 = authenticate(apiService, authHeader)
 
     if (signature == null) {
         Log.e(TAG, "Failed to get signature for image generation.")
