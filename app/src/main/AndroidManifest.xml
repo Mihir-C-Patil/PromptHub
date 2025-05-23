@@ -27,6 +27,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="security.TamperDetectedActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-# Install script for directory: B:/Old Project/PromptHub/PromptHub-Tony/app/src/main/cpp
+# Install script for directory: C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/src/main/cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Users/chich/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Users/tonyy/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-objdump.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "B:/Old Project/PromptHub/PromptHub-Tony/app/.cxx/Debug/2l13z1y4/x86/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/.cxx/Debug/2l13z1y4/x86/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

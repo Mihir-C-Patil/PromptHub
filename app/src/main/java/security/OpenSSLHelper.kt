@@ -114,7 +114,7 @@ class TamperCheck2 {
     private external fun verifyApkHash2(computedHash: String): Boolean
 }
 
-fun logTamperCheckInfo2(context: Context) {
+fun logTamperCheckInfo2(context: Context) : Boolean {
     try {
         val helper = TamperCheck2()
         val isUntampered = helper.verifyApkIntegrity(context)
@@ -131,6 +131,8 @@ fun logTamperCheckInfo2(context: Context) {
             Log.w("TamperCheck2", "Security alert: APK integrity compromised!")
         }
 
+        return isUntampered
+
     } catch (e: Exception) {
         Log.e("TamperCheck2", """
         APK Integrity Check Failed:
@@ -138,5 +140,6 @@ fun logTamperCheckInfo2(context: Context) {
         Error: ${e.message}
         Stacktrace: ${e.stackTraceToString()}
         """.trimIndent())
+        return false
     }
 }
