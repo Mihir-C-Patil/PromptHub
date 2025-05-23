@@ -25,8 +25,6 @@ import android.content.Context
 class RetrofitClient private constructor(private val context: Context) {
     companion object {
         private const val TAG = "RetrofitClient"
-        private const val BASE_URL = "https://ai.elliottwen.info/"
-        private const val SECURE_KEY = "Kj8nM2pL9vX4wQ7rT5yU1hB3cF6dE8aG" //hide this shit
         private const val CACHE_SIZE = 10 * 1024 * 1024L // 10MB cache
 
         @Volatile
@@ -87,7 +85,7 @@ class RetrofitClient private constructor(private val context: Context) {
         method: String
     ): String {
         return try {
-            val dataToSign = "$requestId:$timestamp:$path:$method:$SECURE_KEY"
+            val dataToSign = "$requestId:$timestamp:$path:$method:${ApiConfig.SECURE_KEY}"
             MessageDigest.getInstance("SHA-256")
                 .digest(dataToSign.toByteArray())
                 .joinToString("") { "%02x".format(it) }
@@ -190,11 +188,11 @@ class RetrofitClient private constructor(private val context: Context) {
     private val retrofit: Retrofit by lazy {
         try {
             Log.d(TAG, "🔒 Security: Initializing API client")
-            Log.d(TAG, "  ├─ Base URL: $BASE_URL")
+            Log.d(TAG, "  ├─ Base URL: ${ApiConfig.BASE_URL}")
             Log.d(TAG, "  └─ Converter: Moshi")
             
             Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(ApiConfig.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()

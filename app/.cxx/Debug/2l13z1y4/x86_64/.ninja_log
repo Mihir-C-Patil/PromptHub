@@ -1,21 +1,5 @@
 # ninja log v5
-1	3828	7697004939761976	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-3832	4536	7697004946724642	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-4	1574	7697008289005053	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-1575	1934	7697008292434971	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-3	699	7697008492515271	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-700	846	7697008493871732	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-3	693	7697008573467727	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-694	828	7697008574680025	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-5	1012	7697009197772012	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-1013	1211	7697009199638904	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-3	886	7697010112264316	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-886	1032	7697010113589913	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-2	738	7697010568624702	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-739	875	7697010569864886	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-5	933	7697011658233936	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-934	1074	7697011659507803	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-3	782	7697012856274728	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-783	930	7697012857617599	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
-5	852	7697015103330628	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
-852	1019	7697015104867635	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
+1	719	7697021750871679	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
+721	877	7697021752330359	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
+6	832	7697027613642964	CMakeFiles/native-lib.dir/native-lib.cpp.o	3ebcbd0a4646bf49
+833	991	7697027615079519	B:/Android Project 2/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	7ee8118deba13c27
