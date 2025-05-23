@@ -5,7 +5,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.GenerateImageRequest
-import com.example.prompthub.utils.AuthObfuscator
 import retrofit2.Response
 
 private const val TAG = "ApiFunctions"
@@ -19,7 +18,7 @@ suspend fun authenticate(
         if (response.isSuccessful) {
             response.body()?.signature
         } else {
-            Log.e(TAG, "Authentication failed: ${response.code()}")
+            Log.e(TAG, "Authentication failed: ${response.code()} - ${response.errorBody()}")
             null
         }
     } catch (e: IOException) {
@@ -33,6 +32,7 @@ suspend fun authenticate(
         null
     }
 }
+
 
 suspend fun generateImage(
     apiService: ApiService,
@@ -49,11 +49,15 @@ suspend fun generateImage(
     return try {
         val generateImageRequest = GenerateImageRequest(signature, prompt)
         val response: Response<String> = apiService.generateImage(authHeader, generateImageRequest)
-        
+        Log.d(TAG, "Image generation response: $response")
+
         if (response.isSuccessful) {
             response.body()
         } else {
-            Log.e(TAG, "Image generation failed: ${response.code()}")
+            Log.e(
+                TAG,
+                "Image generation failed: ${response.code()} - ${response.errorBody()?.string()}"
+            )
             null
         }
     } catch (e: IOException) {
