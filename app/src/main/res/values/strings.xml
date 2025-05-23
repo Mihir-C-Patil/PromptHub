@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PromptHub</string>
+    <string name="enter_prompt_hint">Enter your prompt here…</string>
+    <string name="generate_image_button">Generate Image</string>
+    <string name="save_image_button">Save Image</string>
+    <string name="imageDescription">Either a placeholder image, error image, or generated image</string>
+</resources>

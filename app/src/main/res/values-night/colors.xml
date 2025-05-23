@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common colors (can be the same as in values/colors.xml) -->
+    <color name="green_accent">#00b050</color> <!-- A slightly lighter green might look better on dark -->
+
+    <!-- Dark Theme Specific Colors -->
+    <!-- These are standard Material Design dark theme colors -->
+    <color name="primary_dark">#121212</color>
+    <color name="primary_variant_dark">#00b050</color>
+    <color name="on_primary_dark">#FFFFFF</color> <!-- White text on primary dark -->
+
+    <color name="secondary_dark">#00b050</color> <!-- Accent color -->
+    <color name="secondary_variant_dark">#00b050</color>
+    <color name="on_secondary_dark">#000000</color> <!-- Black text on secondary dark (often used for icons) -->
+
+    <color name="background_dark">#121212</color> <!-- Dark background -->
+    <color name="on_background_dark">#FFFFFF</color> <!-- White text on background -->
+
+    <color name="surface_dark">#1D1D1D</color> <!-- Slightly lighter dark for surfaces -->
+    <color name="on_surface_dark">#FFFFFF</color> <!-- White text on surface -->
+
+    <color name="error_dark">#B00020</color>
+    <color name="on_error_dark">#000000</color>
+
+    <!-- More dark theme colors as needed -->
+</resources>

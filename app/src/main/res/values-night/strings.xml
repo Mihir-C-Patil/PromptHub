@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="imageDescription">Either a placeholder image, error image, or generated image</string>
+</resources>

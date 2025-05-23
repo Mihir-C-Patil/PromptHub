@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common colors -->
+    <color name="green_accent">#00b050</color> <!-- A nice shade of green -->
+
+    <!-- Light Theme Specific Colors (Default) -->
+    <color name="purple_200">#00b050</color>
+    <color name="purple_500">#00b050</color>
+    <color name="purple_700">#00b050</color>
+    <color name="teal_200">#00b050</color>
+    <color name="teal_700">#00b050</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Declare the dark theme color names here as well -->
+    <!-- You can set them to transparent or placeholder values if they are truly dark-only -->
+    <!-- Or, define corresponding light theme colors for a complete light theme -->
+    <color name="primary_dark">#00b050</color> <!-- Example light primary -->
+    <color name="primary_variant_dark">#00b050</color> <!-- Example light primary variant -->
+    <color name="on_primary_dark">#FFFFFF</color> <!-- Example light text on primary -->
+
+    <color name="secondary_dark">#00b050</color> <!-- Use the accent color -->
+    <color name="secondary_variant_dark">#00b050</color> <!-- Example light secondary variant -->
+    <color name="on_secondary_dark">#000000</color> <!-- Example light text on secondary -->
+
+    <color name="background_dark">#FFFFFF</color> <!-- Example light background -->
+    <color name="on_background_dark">#000000</color> <!-- Example light text on background -->
+
+    <color name="surface_dark">#FFFFFF</color> <!-- Example light surface -->
+    <color name="on_surface_dark">#000000</color> <!-- Example light text on surface -->
+
+    <color name="error_dark">#B00020</color> <!-- Example light error color -->
+    <color name="on_error_dark">#FFFFFF</color> <!-- Example light text on error -->
+
+
+    <!-- More light theme colors as needed -->
+</resources>

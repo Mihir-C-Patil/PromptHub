@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PromptHub" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:statusBarColor">@color/green_accent</item>
+        <!-- Primary brand color overrides for dark theme. -->
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorPrimaryVariant">@color/primary_variant_dark</item>
+        <item name="colorOnPrimary">@color/on_primary_dark</item>
+        <!-- Secondary brand color (accent) - can use the same or a slightly different shade -->
+        <item name="colorSecondary">@color/green_accent</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant_dark</item>
+        <item name="colorOnSecondary">@color/on_secondary_dark</item>
+
+        <!-- Background, Surface, and text colors for dark theme -->
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnBackground">@color/on_background_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+
+        <!-- Customize your theme overrides here. -->
+    </style>
+</resources>
