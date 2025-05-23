@@ -1,0 +1,3 @@
+B:/Old Project/PromptHub/PromptHub-Tony/app/.cxx/Debug/2l13z1y4/x86_64/CMakeFiles/native-lib.dir
+B:/Old Project/PromptHub/PromptHub-Tony/app/.cxx/Debug/2l13z1y4/x86_64/CMakeFiles/edit_cache.dir
+B:/Old Project/PromptHub/PromptHub-Tony/app/.cxx/Debug/2l13z1y4/x86_64/CMakeFiles/rebuild_cache.dir
