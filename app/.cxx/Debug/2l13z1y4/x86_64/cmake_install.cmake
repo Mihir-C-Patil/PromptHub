@@ -1,4 +1,4 @@
-# Install script for directory: B:/Old Project/PromptHub/PromptHub-Tony/app/src/main/cpp
+# Install script for directory: B:/Android Project 2/PromptHub/app/src/main/cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "B:/Old Project/PromptHub/PromptHub-Tony/app/.cxx/Debug/2l13z1y4/x86_64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "B:/Android Project 2/PromptHub/app/.cxx/Debug/2l13z1y4/x86_64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

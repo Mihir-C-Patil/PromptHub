@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\Users\chich\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -S"B:\Old Project\PromptHub\PromptHub-Tony\app\src\main\cpp" -B"B:\Old Project\PromptHub\PromptHub-Tony\app\.cxx\Debug\2l13z1y4\x86_64"
+  command = C:\Users\chich\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -S"B:\Android Project 2\PromptHub\app\src\main\cpp" -B"B:\Android Project 2\PromptHub\app\.cxx\Debug\2l13z1y4\x86_64"
   description = Re-running CMake...
   generator = 1
 

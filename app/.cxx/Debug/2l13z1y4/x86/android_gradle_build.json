@@ -1,19 +1,19 @@
 {
   "buildFiles": [
-    "B:\\Old Project\\PromptHub\\PromptHub-Tony\\app\\src\\main\\cpp\\CMakeLists.txt"
+    "B:\\Android Project 2\\PromptHub\\app\\src\\main\\cpp\\CMakeLists.txt"
   ],
   "cleanCommandsComponents": [
     [
       "C:\\Users\\chich\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
       "-C",
-      "B:\\Old Project\\PromptHub\\PromptHub-Tony\\app\\.cxx\\Debug\\2l13z1y4\\x86",
+      "B:\\Android Project 2\\PromptHub\\app\\.cxx\\Debug\\2l13z1y4\\x86",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "C:\\Users\\chich\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
     "-C",
-    "B:\\Old Project\\PromptHub\\PromptHub-Tony\\app\\.cxx\\Debug\\2l13z1y4\\x86",
+    "B:\\Android Project 2\\PromptHub\\app\\.cxx\\Debug\\2l13z1y4\\x86",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
@@ -21,7 +21,7 @@
       "toolchain": "toolchain",
       "abi": "x86",
       "artifactName": "native-lib",
-      "output": "B:\\Old Project\\PromptHub\\PromptHub-Tony\\app\\build\\intermediates\\cxx\\Debug\\2l13z1y4\\obj\\x86\\libnative-lib.so",
+      "output": "B:\\Android Project 2\\PromptHub\\app\\build\\intermediates\\cxx\\Debug\\2l13z1y4\\obj\\x86\\libnative-lib.so",
       "runtimeFiles": []
     }
   },

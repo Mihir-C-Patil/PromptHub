@@ -18,13 +18,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.prompthub.R
-import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.RetrofitClient
 import com.example.prompthub.ui.viewmodel.ImageViewModel
 import com.example.prompthub.ui.viewmodel.ImageViewModelFactory
@@ -70,7 +68,8 @@ class ImageGenerationFragment : Fragment() {
 
         saveButton.isEnabled = false
 
-        val apiService = RetrofitClient.apiService
+        val retrofitClient = RetrofitClient.getInstance(requireContext())
+        val apiService = retrofitClient.apiService
 
         viewModel = ViewModelProvider(this, ImageViewModelFactory(apiService, AUTH_HEADER))
             .get(ImageViewModel::class.java)

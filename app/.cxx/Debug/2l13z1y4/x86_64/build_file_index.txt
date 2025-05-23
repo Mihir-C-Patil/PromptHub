@@ -1,1 +1,1 @@
-B:\Old Project\PromptHub\PromptHub-Tony\app\src\main\cpp\CMakeLists.txt
+B:\Android Project 2\PromptHub\app\src\main\cpp\CMakeLists.txt
