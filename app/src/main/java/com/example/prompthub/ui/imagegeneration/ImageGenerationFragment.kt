@@ -40,11 +40,6 @@ class ImageGenerationFragment : Fragment() {
 
     private lateinit var viewModel: ImageViewModel
 
-    private val AUTH_HEADER: String by lazy {
-        ObfuscationHelper.retrieveAuthHeader()
-            ?: throw IllegalStateException("Auth header is missing!")
-    }
-
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -75,7 +70,7 @@ class ImageGenerationFragment : Fragment() {
 
         val apiService = RetrofitClient.apiService
 
-        viewModel = ViewModelProvider(this, ImageViewModelFactory(apiService, AUTH_HEADER))
+        viewModel = ViewModelProvider(this, ImageViewModelFactory(apiService))
             .get(ImageViewModel::class.java)
 
         generateButton.setOnClickListener {

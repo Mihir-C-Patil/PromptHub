@@ -49,7 +49,6 @@ object ObfuscationHelper {
     }
 
     private fun simpleStringManipulation(input: String): String {
-        // Example: reverse a portion of the string or interleave characters
         val charArray = input.toCharArray()
         for (i in 0 until charArray.size / 2) {
             val temp = charArray[i]
