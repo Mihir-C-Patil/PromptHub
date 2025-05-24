@@ -1,8 +1,9 @@
 package com.example.prompthub.utils
 
+import android.util.Log
 import java.nio.charset.StandardCharsets
 
-object fasdfgaetg {
+object KeyLoader {
     val API_KEY17 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
     init {
@@ -19,9 +20,9 @@ object fasdfgaetg {
     external fun f7()
     external fun f8()
 
-    private external fun gbsfdkglrrvd(): String
+    private external fun getObfuscatedAuthHeader(): String
 
-    fun bbafkjgaslgje(): String? {
+    fun retrievePlaintextAuthHeader(): String? {
         return try {
             f0()
             f1()
@@ -33,19 +34,19 @@ object fasdfgaetg {
             f7()
             f8()
 
-            val bfsdruha = gbsfdkglrrvd()
+            val base64EncodedKey = getObfuscatedAuthHeader()
 
-            if (bfsdruha.isEmpty()) {
+            if (base64EncodedKey.isEmpty()) {
                 return null
             }
-            if (bfsdruha.startsWith("Error:")) {
+            if (base64EncodedKey.startsWith("Error:")) {
                 return null
             }
 
-            val vakslgbr = test.bkljawer(bfsdruha)
-            val bjklgsfdgr = String(vakslgbr, StandardCharsets.UTF_8)
+            val decodedBytes = test.decode(base64EncodedKey)
+            val plaintextHeader = String(decodedBytes, StandardCharsets.UTF_8)
 
-            bjklgsfdgr
+            plaintextHeader
         } catch (e: UnsatisfiedLinkError) {
             null
         }

@@ -3,37 +3,37 @@
 
 #include <jni.h>
 
-#define fdsavfds 600
-#define fadlkjdsg 172
+#define OBFUSCATED_STORAGE_SIZE 600
+#define REAL_VALUE_SIZE 172
 
-extern unsigned char gfakfdljga[fdsavfds];
-extern int gfbdjsdlkgjf[fadlkjdsg];
-
-JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f0(JNIEnv *env, jobject thiz);
+extern unsigned char obfuscatedStorage[OBFUSCATED_STORAGE_SIZE];
+extern int real_indices[REAL_VALUE_SIZE];
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f1(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f0(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f2(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f1(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f3(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f2(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f4(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f3(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f5(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f4(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f6(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f5(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f7(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f6(JNIEnv *env, jobject thiz);
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_fasdfgaetg_f8(JNIEnv *env, jobject thiz);
+Java_com_example_prompthub_utils_KeyLoader_f7(JNIEnv *env, jobject thiz);
+
+JNIEXPORT void JNICALL
+Java_com_example_prompthub_utils_KeyLoader_f8(JNIEnv *env, jobject thiz);
 
 #endif
