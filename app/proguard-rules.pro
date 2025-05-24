@@ -27,8 +27,6 @@
 # --- Shrink everything (except what must be kept) ---
 -allowaccessmodification
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
--shrink
--obfuscate
 -printmapping mapping.txt
 -verbose
 
