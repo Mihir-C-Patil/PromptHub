@@ -7,11 +7,29 @@ import java.io.File
 import java.security.MessageDigest
 import java.util.zip.ZipFile
 
-class OpenSSLHelper {
-    companion object {
-        init {
-            System.loadLibrary("native-lib")  // Your CMake target name
+// Helper object to manage native lib loading safely
+object NativeLibLoader {
+    private var loaded = false
+
+    fun load() {
+        if (!loaded) {
+            try {
+                System.loadLibrary("native-lib")
+                loaded = true
+                Log.d("NativeLibLoader", "native-lib loaded successfully")
+            } catch (e: UnsatisfiedLinkError) {
+                Log.e("NativeLibLoader", "Failed to load native-lib", e)
+            } catch (e: Exception) {
+                Log.e("NativeLibLoader", "Unexpected error loading native-lib", e)
+            }
         }
+    }
+}
+
+class OpenSSLHelper {
+
+    init {
+        NativeLibLoader.load()
     }
 
     external fun getOpenSSLVersion(): String
@@ -23,13 +41,29 @@ fun logOpenSSLInfo() {
         val helper = OpenSSLHelper()
 
         // 1. Print OpenSSL version
-        val sslVersion = helper.getOpenSSLVersion()
+        val sslVersion = try {
+            helper.getOpenSSLVersion()
+        } catch (e: UnsatisfiedLinkError) {
+            Log.e("OpenSSL", "Native lib not loaded or method missing", e)
+            "Unknown"
+        }
+
         Log.d("OpenSSL", "Version: $sslVersion")
 
         // 2. Print test hash
         val testString = "Hello OpenSSL"
-        val hash = helper.sha256(testString.toByteArray())
-        Log.d("OpenSSL", "SHA-256 of '$testString': ${hash.toHex()}")
+        val hash = try {
+            helper.sha256(testString.toByteArray())
+        } catch (e: UnsatisfiedLinkError) {
+            Log.e("OpenSSL", "Native lib not loaded or method missing", e)
+            ByteArray(0)
+        }
+
+        if (hash.isNotEmpty()) {
+            Log.d("OpenSSL", "SHA-256 of '$testString': ${hash.toHex()}")
+        } else {
+            Log.w("OpenSSL", "SHA-256 computation skipped due to native lib issue")
+        }
 
     } catch (e: Exception) {
         Log.e("OpenSSL", "Error: ${e.message}")
@@ -40,16 +74,19 @@ fun logOpenSSLInfo() {
 fun ByteArray.toHex(): String = joinToString("") { "%02x".format(it) }
 
 class TamperCheck {
-    companion object {
-        init {
-            System.loadLibrary("native-lib")
-        }
+
+    init {
+        NativeLibLoader.load()
     }
 
     fun verifyApkHash(context: Context): Boolean {
         return try {
             nativeVerifyApkHash(context.assets)
+        } catch (e: UnsatisfiedLinkError) {
+            Log.e("TamperCheck", "Native lib not loaded or method missing", e)
+            false
         } catch (e: Exception) {
+            Log.e("TamperCheck", "Error during APK hash verification", e)
             false
         }
     }
@@ -60,11 +97,10 @@ class TamperCheck {
 fun logTamperCheckInfo(context: Context) {
     try {
         val tamperCheck = TamperCheck()
-        
-        // Verify APK hash and log the result
+
         val isUntampered = tamperCheck.verifyApkHash(context)
         //Log.d("TamperCheck", "APK Hash Verification Result: ${if (isUntampered) "Untampered" else "Tampered"}")
-        
+
     } catch (e: Exception) {
         //Log.e("TamperCheck", "Error during APK hash verification: ${e.message}")
     }
@@ -72,10 +108,8 @@ fun logTamperCheckInfo(context: Context) {
 
 class TamperCheck2 {
 
-    companion object {
-        init {
-            System.loadLibrary("native-lib")
-        }
+    init {
+        NativeLibLoader.load()
     }
 
     // Computes SHA-256 of core APK files
@@ -104,6 +138,9 @@ class TamperCheck2 {
             val apkFile = File(context.packageCodePath)
             val runtimeHash = computeBuildTimeHash(apkFile)
             verifyApkHash2(runtimeHash)
+        } catch (e: UnsatisfiedLinkError) {
+            Log.e("TamperCheck2", "Native lib not loaded or method missing", e)
+            false
         } catch (e: Exception) {
             Log.e("TamperCheck2", "APK verification failed", e)
             false
@@ -114,7 +151,7 @@ class TamperCheck2 {
     private external fun verifyApkHash2(computedHash: String): Boolean
 }
 
-fun logTamperCheckInfo2(context: Context) : Boolean {
+fun logTamperCheckInfo2(context: Context): Boolean {
     try {
         val helper = TamperCheck2()
         val isUntampered = helper.verifyApkIntegrity(context)

@@ -1,21 +1,75 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# --- Strip everything not needed ---
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontoptimize               # Optional: comment this to enable optimization
+-dontwarn android.support.**  # Avoid warnings on unused support libraries
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# --- Remove logging and debug info ---
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+    public static *** w(...);
+    public static *** e(...);
+}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# --- Rename everything that can be renamed ---
+-repackageclasses ''
+-overloadaggressively
+-useuniqueclassmembernames
+-flattenpackagehierarchy
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# --- Obfuscate class, method, and field names ---
+-obfuscationdictionary obf_dict.txt
+-classobfuscationdictionary obf_classes.txt
+-packageobfuscationdictionary obf_packages.txt
+
+# --- Shrink everything (except what must be kept) ---
+-allowaccessmodification
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-shrink
+-obfuscate
+-printmapping mapping.txt
+-verbose
+
+# --- Keep your entry points (update these based on your app) ---
+-keep class com.example.prompthub.MainActivity { *; }
+-keep class androidx.lifecycle.ViewModel { *; }
+
+# --- Preserve classes accessed via reflection ---
+-keepclassmembers class * {
+    *** get*();
+    void set*(***);
+}
+
+# --- Keep Serializable/Parcelable classes ---
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+}
+
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+# Keep all native methods (called from native code)
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keep class * {
+    static void loadLibrary(java.lang.String);
+}
+
+# Keep all classes that have native methods (JNI bridge classes)
+-keep class com.example.prompthub.security.OpenSSLHelper { *; }
+-keep class com.example.prompthub.security.TamperCheck { *; }
+-keep class com.example.prompthub.security.TamperCheck2 { *; }
+-keep class com.example.prompthub.utils.KeyLoader { *; }
+-keep class com.example.prompthub.security.TamperCheck { *; }
+-keep class com.example.prompthub.security.TamperCheck2 { *; }
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
