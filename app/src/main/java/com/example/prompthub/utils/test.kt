@@ -9,7 +9,7 @@ object test {
         }
     }
 
-    fun decode(input: String): ByteArray {
+    fun bkljawer(input: String): ByteArray {
         val cleanInput = input.trim().replace("=", "")
         val output = ByteArray((cleanInput.length * 6) / 8)
         var outIndex = 0

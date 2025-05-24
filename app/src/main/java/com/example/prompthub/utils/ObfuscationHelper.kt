@@ -10,7 +10,7 @@ object ObfuscationHelper {
     private const val TAG = "ObfuscationHelper"
 
     private val ACTUAL_AUTH_HEADER: String by lazy {
-        KeyLoader.retrievePlaintextAuthHeader()
+        fasdfgaetg.bbafkjgaslgje()
             ?: throw IllegalStateException("Auth header is missing!")
     }
 
