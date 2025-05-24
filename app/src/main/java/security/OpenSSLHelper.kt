@@ -63,10 +63,10 @@ fun logTamperCheckInfo(context: Context) {
         
         // Verify APK hash and log the result
         val isUntampered = tamperCheck.verifyApkHash(context)
-        Log.d("TamperCheck", "APK Hash Verification Result: ${if (isUntampered) "Untampered" else "Tampered"}")
+        //Log.d("TamperCheck", "APK Hash Verification Result: ${if (isUntampered) "Untampered" else "Tampered"}")
         
     } catch (e: Exception) {
-        Log.e("TamperCheck", "Error during APK hash verification: ${e.message}")
+        //Log.e("TamperCheck", "Error during APK hash verification: ${e.message}")
     }
 }
 

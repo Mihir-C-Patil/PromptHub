@@ -1,18 +1,13 @@
 # ninja log v5
-0	449	7697556373028228	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-451	568	7697556374036300	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-2	392	7697557851630215	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-393	484	7697557852437276	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-2	362	7697558513600200	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-363	459	7697558514442166	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-1	356	7697559368456866	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-357	441	7697559369214687	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-1	385	7697561440936996	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-385	473	7697561441704499	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-2	348	7697568183236620	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-348	428	7697568183933031	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-2	340	7697568393408182	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-340	418	7697568394095280	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
-3	423	7697568914302775	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
-423	511	7697568915095278	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
+1	339	7697591607552451	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
+340	420	7697591608267774	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	f73e602539fd6727
+0	6	0	clean	18a1e3cbb7b4e80a
+2	334	7697609173127089	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
+334	425	7697609173934706	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	b47e99bbf19386c1
+1	352	7697610374343797	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
+352	434	7697610375058239	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	b47e99bbf19386c1
+1	332	7697611121003878	CMakeFiles/native-lib.dir/native-lib.cpp.o	88180eecdb3879d3
+333	413	7697611121707150	C:/Users/tonyy/Documents/MInfoTech/Semester 1/COMPSCI 702/PromptHub/app/build/intermediates/cxx/Debug/2l13z1y4/obj/x86_64/libnative-lib.so	b47e99bbf19386c1
+0	6	0	clean	18a1e3cbb7b4e80a
+0	6	0	clean	18a1e3cbb7b4e80a
 0	6	0	clean	18a1e3cbb7b4e80a

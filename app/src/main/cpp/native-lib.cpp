@@ -95,7 +95,7 @@ std::vector<uint8_t> read_asset(AAssetManager* mgr, const char* filename) {
 void hash_res_directory(AAssetManager* mgr, SHA256_CTX* sha_ctx, const std::string& path) {
     AAssetDir* assetDir = AAssetManager_openDir(mgr, path.c_str());
     if (!assetDir) {
-        LOGD("No directory %s found in assets", path.c_str());
+        //LOGD("No directory %s found in assets", path.c_str());
         return;
     }
 
@@ -113,7 +113,7 @@ void hash_res_directory(AAssetManager* mgr, SHA256_CTX* sha_ctx, const std::stri
         auto data = read_asset(mgr, fullPath.c_str());
         if (data.empty()) {
             SHA256_Update(sha_ctx, data.data(), data.size());
-            LOGD("Hashed res file: %s (%zu bytes)", fullPath.c_str(), data.size());
+            //LOGD("Hashed res file: %s (%zu bytes)", fullPath.c_str(), data.size());
         }
     }
     AAssetDir_close(assetDir);
@@ -125,7 +125,7 @@ Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
     JNIEnv* env, jobject thiz, jobject assetManager) {
     AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
     if (!mgr) {
-        LOGE("Failed to get AssetManager");
+        //LOGE("Failed to get AssetManager");
         return false;
     }
 
@@ -145,7 +145,7 @@ Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
         auto data = read_asset(mgr, core_files[i]);
         if (data.empty()) {
             SHA256_Update(&sha256, data.data(), data.size());
-            LOGD("Hashed core file: %s (%zu bytes)", core_files[i], data.size());
+            //LOGD("Hashed core file: %s (%zu bytes)", core_files[i], data.size());
         }
     }
 
@@ -163,8 +163,8 @@ Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
     }
 
     // Debug output
-    LOGD("Expected hash: %s", EXPECTED_APK_HASH);
-    LOGD("Computed hash: %s", computedHash);
+    //LOGD("Expected hash: %s", EXPECTED_APK_HASH);
+    //LOGD("Computed hash: %s", computedHash);
 
     // Constant-time comparison
     bool match = true;
@@ -172,11 +172,11 @@ Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
         match &= (EXPECTED_APK_HASH[i] == computedHash[i]);
     }
 
-    if (!match) {
+    /*if (!match) {
         LOGE("HASH MISMATCH! Possible tampering detected");
         LOGE("Expected: %s", EXPECTED_APK_HASH);
         LOGE("Actual:   %s", computedHash);
-    }
+    }*/
 
     return match;
 }
@@ -197,11 +197,11 @@ Java_com_example_prompthub_security_TamperCheck2_verifyApkHash2(
         match &= (computedHash[i] == EXPECTED_APK_HASH[i]);
     }
 
-    if (!match) {
+    /*if (!match) {
         LOGE("APK HASH MISMATCH! Possible tampering detected");
         LOGE("Expected: %s", EXPECTED_APK_HASH);
         LOGE("Actual:   %s", computedHash);
-    }
+    }*/
 
     env->ReleaseStringUTFChars(computedHashJava, computedHash);
     return match;

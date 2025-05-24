@@ -22,8 +22,8 @@ include_directories(
 
 target_link_libraries(
         native-lib
-        ${CMAKE_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libssl.so
-        ${CMAKE_SOURCE_DIR}/../jniLibS/${ANDROID_ABI}/libcrypto.so
+        ${CMAKE_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libssl_3.so
+        ${CMAKE_SOURCE_DIR}/../jniLibS/${ANDROID_ABI}/libcrypto_3.so
         #${ANDROID_NDK}/prebuilt/windows-x86_64/libzip.so
         ${log-lib}
         #${zip-lib}
