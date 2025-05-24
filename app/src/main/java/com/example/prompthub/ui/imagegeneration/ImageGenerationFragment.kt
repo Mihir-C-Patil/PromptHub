@@ -18,16 +18,16 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.prompthub.R
-import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.RetrofitClient
 import com.example.prompthub.ui.viewmodel.ImageViewModel
 import com.example.prompthub.ui.viewmodel.ImageViewModelFactory
+import com.example.prompthub.utils.KeyLoader
+import com.example.prompthub.utils.ObfuscationHelper
 import java.io.OutputStream
 
 class ImageGenerationFragment : Fragment() {
@@ -39,8 +39,6 @@ class ImageGenerationFragment : Fragment() {
     private lateinit var loadingProgressBar: ProgressBar
 
     private lateinit var viewModel: ImageViewModel
-
-    private val AUTH_HEADER = "c0957e34a11786192e8819a7d4faef725c3a0becf05716823b30e37111196e92ba1953a695dddd761cce8abbffefce40da8059d06aa651a02f9cc3322a7d1e0b"
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -72,7 +70,7 @@ class ImageGenerationFragment : Fragment() {
 
         val apiService = RetrofitClient.apiService
 
-        viewModel = ViewModelProvider(this, ImageViewModelFactory(apiService, AUTH_HEADER))
+        viewModel = ViewModelProvider(this, ImageViewModelFactory(apiService))
             .get(ImageViewModel::class.java)
 
         generateButton.setOnClickListener {
@@ -152,7 +150,7 @@ class ImageGenerationFragment : Fragment() {
                 put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/Prompthub")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/PromptHub")
                 }
             }
 

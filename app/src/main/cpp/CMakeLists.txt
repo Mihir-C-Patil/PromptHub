@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.22.1)
-project("prompthub")
+project("PromptHub") # You can name your project
 
-#find_library(zip-lib zip)  # Android NDK provides this
+# Adds your C source file to a shared library named "keyobf"
+# This will produce libkeyobf.so
+add_library(keyobf SHARED
+        keyobf.c
+        keyobf_retriever.c
+)
+
+# Optional: Link against the Android log library if you use __android_log_print
 find_library(log-lib log)
 find_library(z-lib z)     # Required for compression
 
@@ -30,3 +37,7 @@ target_link_libraries(
         android
         ${z-lib}
 )
+
+if(log-lib)
+    target_link_libraries(keyobf ${log-lib})
+endif()

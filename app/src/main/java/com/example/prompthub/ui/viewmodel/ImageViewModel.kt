@@ -10,7 +10,7 @@ import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.network.generateImage
 import kotlinx.coroutines.launch
 
-class ImageViewModel(private val apiService: ApiService, private val authHeader: String) : ViewModel() {
+class ImageViewModel(private val apiService: ApiService) : ViewModel() {
 
     private val _imageUrl = MutableLiveData<String?>();
     val imageUrl: LiveData<String?> = _imageUrl
@@ -27,7 +27,7 @@ class ImageViewModel(private val apiService: ApiService, private val authHeader:
 
         viewModelScope.launch {
             try {
-                val url = generateImage(apiService, authHeader, prompt)
+                val url = generateImage(apiService, prompt)
                 _imageUrl.value = url
 
                 if (url == null) {
@@ -42,14 +42,11 @@ class ImageViewModel(private val apiService: ApiService, private val authHeader:
     }
 }
 
-class ImageViewModelFactory(
-    private val apiService: ApiService,
-    private val authHeader: String
-) : ViewModelProvider.Factory {
+class ImageViewModelFactory(private val apiService: ApiService) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ImageViewModel::class.java)) {
-            return ImageViewModel(apiService, authHeader) as T
+            return ImageViewModel(apiService) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

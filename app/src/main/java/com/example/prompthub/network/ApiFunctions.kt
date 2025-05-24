@@ -5,30 +5,41 @@ import retrofit2.HttpException
 import java.io.IOException
 import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.GenerateImageRequest
+import com.example.prompthub.data.api.GenerateNonsense
+import com.example.prompthub.ui.imagegeneration.MaoZedong
+import com.example.prompthub.utils.MumbaiSpiderman
+import com.example.prompthub.utils.ObfuscationHelper
 import retrofit2.Response
 
 private const val TAG = "ApiFunctions"
 
-suspend fun authenticate(
-    apiService: ApiService,
-    authHeader: String
-): String? {
+suspend fun authenticate(apiService: ApiService): String? {
     return try {
-        val response = apiService.authenticate(authHeader)
-        if (response.isSuccessful) {
-            response.body()?.signature
-        } else {
-            Log.e(TAG, "Authentication failed: ${response.code()} - ${response.errorBody()}")
-            null
+        val keySuppliers = listOf<suspend () -> String?>(
+            { EnglishLevel100.decodeFries() },
+            { MumbaiSpiderman.decodeFries() },
+            { MaoZedong.decodeFries() }
+        ).shuffled()
+
+        for (getKey in keySuppliers) {
+            val key = getKey()
+            val result = try {
+                key?.let {
+                    val response = apiService.authenticate(it)
+                    if (response.isSuccessful) {
+                        return response.body()?.signature
+                    } else null
+                }
+            } catch (_: Exception) {
+                null
+            }
+
+            kotlinx.coroutines.delay((50L..200L).random())
         }
-    } catch (e: IOException) {
-        Log.e(TAG, "Network error during authentication", e)
-        null
-    } catch (e: HttpException) {
-        Log.e(TAG, "HTTP error during authentication: ${e.code()}", e)
+
         null
     } catch (e: Exception) {
-        Log.e(TAG, "Unexpected error during authentication", e)
+        Log.e("Auth", "Unexpected error during authentication", e)
         null
     }
 }
@@ -36,30 +47,39 @@ suspend fun authenticate(
 
 suspend fun generateImage(
     apiService: ApiService,
-    authHeader: String,
     prompt: String
 ): String? {
-    val signature = authenticate(apiService, authHeader)
+    val signature = authenticate(apiService)
 
     if (signature == null) {
         Log.e(TAG, "Failed to get signature for image generation.")
         return null
     }
 
-    return try {
+    try {
         val generateImageRequest = GenerateImageRequest(signature, prompt)
-        val response: Response<String> = apiService.generateImage(authHeader, generateImageRequest)
-        Log.d(TAG, "Image generation response: $response")
+        val keySuppliers = listOf<suspend () -> String?>(
+            { EnglishLevel100.decodeFries() },
+            { MumbaiSpiderman.decodeFries() },
+            { MaoZedong.decodeFries() }
+        ).shuffled()
 
-        if (response.isSuccessful) {
-            response.body()
-        } else {
-            Log.e(
-                TAG,
-                "Image generation failed: ${response.code()} - ${response.errorBody()?.string()}"
-            )
-            null
+        for (getKey in keySuppliers) {
+            val key = getKey()
+            val result = try {
+                key?.let {
+                    val response: Response<String> = apiService.generateImage(it, generateImageRequest)
+                    if (response.isSuccessful) {
+                        return response.body()
+                    } else null
+                }
+            } catch (_: Exception) {
+                null
+            }
+
+            kotlinx.coroutines.delay((50L..200L).random())
         }
+
     } catch (e: IOException) {
         Log.e(TAG, "Network error during image generation", e)
         null
@@ -70,4 +90,5 @@ suspend fun generateImage(
         Log.e(TAG, "Unexpected error during image generation", e)
         null
     }
+    return null
 }
