@@ -56,22 +56,30 @@ suspend fun generateImage(
         return null
     }
 
-    return try {
+    try {
         val generateImageRequest = GenerateImageRequest(signature, prompt)
-        val authHeader = MaoZedong.decodeFries()
+        val keySuppliers = listOf<suspend () -> String?>(
+            { EnglishLevel100.decodeFries() },
+            { MumbaiSpiderman.decodeFries() },
+            { MaoZedong.decodeFries() }
+        ).shuffled()
 
-        val response: Response<String> = apiService.generateImage(authHeader, generateImageRequest)
-        Log.d(TAG, "Image generation response: $response")
+        for (getKey in keySuppliers) {
+            val key = getKey()
+            val result = try {
+                key?.let {
+                    val response: Response<String> = apiService.generateImage(it, generateImageRequest)
+                    if (response.isSuccessful) {
+                        return response.body()
+                    } else null
+                }
+            } catch (_: Exception) {
+                null
+            }
 
-        if (response.isSuccessful) {
-            response.body()
-        } else {
-            Log.e(
-                TAG,
-                "Image generation failed: ${response.code()} - ${response.errorBody()?.string()}"
-            )
-            null
+            kotlinx.coroutines.delay((50L..200L).random())
         }
+
     } catch (e: IOException) {
         Log.e(TAG, "Network error during image generation", e)
         null
@@ -82,4 +90,5 @@ suspend fun generateImage(
         Log.e(TAG, "Unexpected error during image generation", e)
         null
     }
+    return null
 }
