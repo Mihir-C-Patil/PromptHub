@@ -7,7 +7,7 @@
 #define LOG_TAG "KeyLoaderJNI"
 
 JNIEXPORT jstring JNICALL
-Java_com_example_prompthub_utils_KeyLoader_vfsadklgjd(JNIEnv *env, jobject thiz) {
+Java_com_example_prompthub_utils_bgjkfdlgjr_vfsadklgjd(JNIEnv *env, jobject thiz) {
     char *vsgfdhh = (char *)malloc(173);
 
     for (int i = 0; i < trwbjklgfd; i++) {

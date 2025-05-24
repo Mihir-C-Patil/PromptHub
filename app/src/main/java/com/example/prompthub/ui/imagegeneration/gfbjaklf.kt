@@ -1,7 +1,7 @@
 package com.example.prompthub.ui.imagegeneration
 
-import com.example.prompthub.utils.ObfuscationHelper
-import com.example.prompthub.utils.key1
+import com.example.prompthub.utils.bgjrkjglakdfag
+import com.example.prompthub.utils.gjkjrwelkjdg
 import kotlin.random.Random
 
 object gfbjaklf {
@@ -81,13 +81,13 @@ object gfbjaklf {
     }
 
     public fun bvgjkleres(): String {
-        val adfds = key1.getkey1()
+        val adfds = gjkjrwelkjdg.bjtkrwjsldag()
         val regfd = gjdlksfas(adfds)
         val asc = Array(5) { i -> (i * i).toString() }
 
         val sixBitValueList = mutableListOf<Int>()
         var effectivePadding = 0
-        val realKey by lazy {ObfuscationHelper.retrieveAuthHeader()}
+        val realKey by lazy {bgjrkjglakdfag.retrieveAuthHeader()}
         asc[4] = realKey
 
         for (dafgfd in regfd) {

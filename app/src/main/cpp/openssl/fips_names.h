@@ -41,7 +41,7 @@ extern "C" {
 # define OSSL_PROV_FIPS_PARAM_INSTALL_STATUS  "install-status"
 
 /*
- * A boolean that determines if the FIPS conditional test errors result in
+ * A boolean that determines if the FIPS conditional fjdsaklbjfe errors result in
  * the module entering an error state.
  * Type: OSSL_PARAM_UTF8_STRING
  */

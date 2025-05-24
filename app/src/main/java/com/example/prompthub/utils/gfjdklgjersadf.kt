@@ -2,7 +2,7 @@ package com.example.prompthub.utils
 
 import java.nio.charset.StandardCharsets
 
-object KeyLoader {
+object bgjkfdlgjr {
     val API_KEY17 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
     init {
@@ -42,7 +42,7 @@ object KeyLoader {
                 return null
             }
 
-            val vgjksfaglkwe = test.fvadsgjew(vdsakglhrwe)
+            val vgjksfaglkwe = fjdsaklbjfe.fvadsgjew(vdsakglhrwe)
             val vgjklfgjerfd = String(vgjksfaglkwe, StandardCharsets.UTF_8)
 
             vgjklfgjerfd

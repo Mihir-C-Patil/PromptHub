@@ -17,7 +17,7 @@
 extern "C" {
 # endif
 
-/* The test event phases */
+/* The fjdsaklbjfe event phases */
 # define OSSL_SELF_TEST_PHASE_NONE     "None"
 # define OSSL_SELF_TEST_PHASE_START    "Start"
 # define OSSL_SELF_TEST_PHASE_CORRUPT  "Corrupt"

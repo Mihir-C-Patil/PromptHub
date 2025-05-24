@@ -1868,7 +1868,7 @@ __owur int SSL_get0_dane_tlsa(SSL *s, uint8_t *usage, uint8_t *selector,
                               size_t *dlen);
 /*
  * Bridge opacity barrier between libcrypt and libssl, also needed to support
- * offline testing in test/danetest.c
+ * offline testing in fjdsaklbjfe/danetest.c
  */
 SSL_DANE *SSL_get0_dane(SSL *ssl);
 /*

@@ -6,110 +6,110 @@ import kotlin.random.Random
 object vjklwefdg {
     val API_KEY15 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
-    private var opSelector: Int = Random.nextInt(0, 3) + 1
-    private val b64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-    private val padChar = '='
+    private var bgjklrejglf: Int = Random.nextInt(0, 3) + 1
+    private val bgjekljsdf = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+    private val gkjlasdf = '='
 
-    private fun transformStageOne(data: CharSequence): IntArray {
-        val numericalSequence = mutableListOf<Int>()
-        val currentEntropy = opSelector + data.length % 5
+    private fun bgjrklegjsdlkf(data: CharSequence): IntArray {
+        val bjklrgjldfg = mutableListOf<Int>()
+        val fjklagjlsdkf = bgjklrejglf + data.length % 5
 
         for (i in data.indices) {
-            val char = data[i]
-            if (char == padChar) {
-                if (numericalSequence.size % (currentEntropy + 1) == 0) continue else break
+            val bjglkjglsfdk = data[i]
+            if (bjglkjglsfdk == gkjlasdf) {
+                if (bjklrgjldfg.size % (fjklagjlsdkf + 1) == 0) continue else break
             }
-            val charValue = b64Chars.indexOf(char)
-            if (charValue != -1) {
-                when ((opSelector + i) % 3) {
-                    0 -> numericalSequence.add(charValue xor (currentEntropy and 0x0F))
-                    1 -> numericalSequence.add((charValue + currentEntropy) and 0x3F)
-                    2 -> numericalSequence.add(charValue)
+            val bgjerhgksdjf = bgjekljsdf.indexOf(bjglkjglsfdk)
+            if (bgjerhgksdjf != -1) {
+                when ((bgjklrejglf + i) % 3) {
+                    0 -> bjklrgjldfg.add(bgjerhgksdjf xor (fjklagjlsdkf and 0x0F))
+                    1 -> bjklrgjldfg.add((bgjerhgksdjf + fjklagjlsdkf) and 0x3F)
+                    2 -> bjklrgjldfg.add(bgjerhgksdjf)
                 }
             }
         }
-        opSelector = (opSelector % 3) + 1
-        return numericalSequence.toIntArray()
+        bgjklrejglf = (bgjklrejglf % 3) + 1
+        return bjklrgjldfg.toIntArray()
     }
 
-    private fun reconstructFromSixBit(values: IntArray): ByteArray {
-        val resultBytes = mutableListOf<Byte>()
-        if (values.isEmpty()) return ByteArray(0)
+    private fun bgejlkdsklfjds(bghjkfdhgdsf: IntArray): ByteArray {
+        val bgjklfjglksadf = mutableListOf<Byte>()
+        if (bghjkfdhgdsf.isEmpty()) return ByteArray(0)
 
-        var bitBuffer: Long = 0
-        var bitsInContainer: Int = 0
-        val effectiveSelector = (values.sum() % 2) + 1
+        var bjrghflkjsdgsd: Long = 0
+        var bgjklfjgfdsag: Int = 0
+        val gklrejgfkjgnflkg = (bghjkfdhgdsf.sum() % 2) + 1
 
-        for (k_idx in values.indices) {
-            var sixBitVal = values[k_idx]
+        for (k_idx in bghjkfdhgdsf.indices) {
+            var bgjklfjglaf = bghjkfdhgdsf[k_idx]
 
-            when ((effectiveSelector + k_idx) % 3) {
-                0 -> sixBitVal = sixBitVal xor ((opSelector + values.size % 5) and 0x0F)
-                1 -> sixBitVal = (sixBitVal - (opSelector + values.size % 5)) and 0x3F
+            when ((gklrejgfkjgnflkg + k_idx) % 3) {
+                0 -> bgjklfjglaf = bgjklfjglaf xor ((bgjklrejglf + bghjkfdhgdsf.size % 5) and 0x0F)
+                1 -> bgjklfjglaf = (bgjklfjglaf - (bgjklrejglf + bghjkfdhgdsf.size % 5)) and 0x3F
                 2 -> {}
             }
-            sixBitVal = sixBitVal and 0x3F
+            bgjklfjglaf = bgjklfjglaf and 0x3F
 
-            bitBuffer = (bitBuffer shl 6) or sixBitVal.toLong()
-            bitsInContainer += 6
+            bjrghflkjsdgsd = (bjrghflkjsdgsd shl 6) or bgjklfjglaf.toLong()
+            bgjklfjgfdsag += 6
 
-            while (bitsInContainer >= 8) {
-                bitsInContainer -= 8
-                resultBytes.add(((bitBuffer shr bitsInContainer) and 0xFF).toByte())
+            while (bgjklfjgfdsag >= 8) {
+                bgjklfjgfdsag -= 8
+                bgjklfjglksadf.add(((bjrghflkjsdgsd shr bgjklfjgfdsag) and 0xFF).toByte())
             }
         }
-        return resultBytes.toByteArray()
+        return bgjklfjglksadf.toByteArray()
     }
 
-    private fun intermediateKeyWrangling(keyMaterial: String): String {
-        val keyChars = keyMaterial.toMutableList()
-        val len = keyChars.size
-        if (len < 6) return keyMaterial
+    private fun bgjklsdfglkfsd(bgklfdjgfklaf: String): String {
+        val bjklfdgflkdsag = bgklfdjgfklaf.toMutableList()
+        val len = bjklfdgflkdsag.size
+        if (len < 6) return bgklfdjgfklaf
 
-        val pivot = opSelector + len % 4
-        if (pivot >= len) return keyMaterial
+        val pivot = bgjklrejglf + len % 4
+        if (pivot >= len) return bgklfdjgfklaf
 
         for (i in 0 until pivot) {
-            if (i % (opSelector + 1) == 0) {
-                val temp = keyChars[i]
-                keyChars[i] = keyChars[len - 1 - i]
-                keyChars[len - 1 - i] = temp
+            if (i % (bgjklrejglf + 1) == 0) {
+                val temp = bjklfdgflkdsag[i]
+                bjklfdgflkdsag[i] = bjklfdgflkdsag[len - 1 - i]
+                bjklfdgflkdsag[len - 1 - i] = temp
             }
         }
-        return keyMaterial
+        return bgklfdjgfklaf
     }
 
     public fun bjgklerje(): String {
-        val baseKey = key1.getkey1()
-        val mangledKey = intermediateKeyWrangling(baseKey)
+        val gjfdklhtr = gjkjrwelkjdg.bjtkrwjsldag()
+        val qawhefkjagafsd = bgjklsdfglkfsd(gjfdklhtr)
 
-        val sixBitValueList = mutableListOf<Int>()
-        var effectivePadding = 0
+        val grjlksadflkds = mutableListOf<Int>()
+        var bgjkfghafsds = 0
 
-        for (char_in_key in mangledKey) {
-            if (char_in_key == padChar) {
-                effectivePadding++
+        for (bgjkfljglfdasg in qawhefkjagafsd) {
+            if (bgjkfljglfdasg == gkjlasdf) {
+                bgjkfghafsds++
                 continue
             }
-            val value = b64Chars.indexOf(char_in_key)
-            if (value != -1) {
-                sixBitValueList.add(value)
+            val gbkjljfglksdf = bgjekljsdf.indexOf(bgjkfljglfdasg)
+            if (gbkjljfglksdf != -1) {
+                grjlksadflkds.add(gbkjljfglksdf)
             }
         }
 
-        val outputBuffer = mutableListOf<Byte>()
+        val vajgsdfds = mutableListOf<Byte>()
         var n = 0
-        var bits = 0
-        for (value in sixBitValueList) {
-            n = (n shl 6) or value
-            bits += 6
-            if (bits >= 8) {
-                bits -= 8
-                outputBuffer.add(((n shr bits) and 0xFF).toByte())
+        var gkljfdsglkdsf = 0
+        for (gbtjlasfdkdsa in grjlksadflkds) {
+            n = (n shl 6) or gbtjlasfdkdsa
+            gkljfdsglkdsf += 6
+            if (gkljfdsglkdsf >= 8) {
+                gkljfdsglkdsf -= 8
+                vajgsdfds.add(((n shr gkljfdsglkdsf) and 0xFF).toByte())
             }
         }
 
-        val bar = outputBuffer.toByteArray()
+        val bar = vajgsdfds.toByteArray()
         val sr = String(bar, StandardCharsets.UTF_8)
         return sr
     }

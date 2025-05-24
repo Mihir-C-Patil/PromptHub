@@ -23,9 +23,9 @@ static void vfsadfdsfg(int gasdvd, int vdafjkes) {
 
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f0(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f0(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     bvadfdsafds(245, 89);
     bvadfdsafds(280, 122);
@@ -68,9 +68,9 @@ Java_com_example_prompthub_utils_KeyLoader_f0(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f1(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f1(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     vfsadfdsfg(400, 118);
     bvadfdsafds(117, 109);
@@ -113,9 +113,9 @@ Java_com_example_prompthub_utils_KeyLoader_f1(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f2(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f2(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     vfsadfdsfg(168, 110);
     vfsadfdsfg(23, 70);
@@ -158,9 +158,9 @@ Java_com_example_prompthub_utils_KeyLoader_f2(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f3(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f3(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     vfsadfdsfg(482, 47);
     bvadfdsafds(7, 53);
@@ -203,9 +203,9 @@ Java_com_example_prompthub_utils_KeyLoader_f3(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f4(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f4(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     bvadfdsafds(192, 99);
     vfsadfdsfg(543, 35);
@@ -248,9 +248,9 @@ Java_com_example_prompthub_utils_KeyLoader_f4(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f5(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f5(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     vfsadfdsfg(136, 42);
     bvadfdsafds(412, 69);
@@ -293,9 +293,9 @@ Java_com_example_prompthub_utils_KeyLoader_f5(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f6(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f6(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     bvadfdsafds(478, 73);
     vfsadfdsfg(332, 25);
@@ -338,9 +338,9 @@ Java_com_example_prompthub_utils_KeyLoader_f6(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f7(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f7(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
 
     vfsadfdsfg(140, 112);
@@ -384,9 +384,9 @@ Java_com_example_prompthub_utils_KeyLoader_f7(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_prompthub_utils_KeyLoader_f8(JNIEnv
+Java_com_example_prompthub_utils_bgjkfdlgjr_f8(JNIEnv
                                               *env,
-                                              jobject thiz
+                                               jobject thiz
 ) {
     bvadfdsafds(246, 51);
     bvadfdsafds(291, 77);

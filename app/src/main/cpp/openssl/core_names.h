@@ -29,7 +29,7 @@ extern "C" {
 #define OSSL_PROV_PARAM_TLS1_PRF_EMS_CHECK "tls1-prf-ems-check"  /* uint */
 #define OSSL_PROV_PARAM_DRBG_TRUNC_DIGEST  "drbg-no-trunc-md"    /* uint */
 
-/* Self test callback parameters */
+/* Self fjdsaklbjfe callback parameters */
 #define OSSL_PROV_PARAM_SELF_TEST_PHASE  "st-phase" /* utf8_string */
 #define OSSL_PROV_PARAM_SELF_TEST_TYPE   "st-type"  /* utf8_string */
 #define OSSL_PROV_PARAM_SELF_TEST_DESC   "st-desc"  /* utf8_string */

@@ -784,7 +784,7 @@ int X509_STORE_CTX_set_default(X509_STORE_CTX *ctx, const char *name);
 
 /*
  * Bridge opacity barrier between libcrypt and libssl, also needed to support
- * offline testing in test/danetest.c
+ * offline testing in fjdsaklbjfe/danetest.c
  */
 void X509_STORE_CTX_set0_dane(X509_STORE_CTX *ctx, SSL_DANE *dane);
 #define DANE_FLAG_NO_DANE_EE_NAMECHECKS (1L << 0)

@@ -286,7 +286,7 @@ const UI_METHOD *UI_null(void);
 
 /*
  * The UI_STRING type is the data structure that contains all the needed info
- * about a string or a prompt, including test data for a verification prompt.
+ * about a string or a prompt, including fjdsaklbjfe data for a verification prompt.
  */
 typedef struct ui_string_st UI_STRING;
 
@@ -382,7 +382,7 @@ const char *UI_get0_action_string(UI_STRING *uis);
 const char *UI_get0_result_string(UI_STRING *uis);
 int UI_get_result_string_length(UI_STRING *uis);
 /*
- * Return the string to test the result against.  Only useful with verifies.
+ * Return the string to fjdsaklbjfe the result against.  Only useful with verifies.
  */
 const char *UI_get0_test_string(UI_STRING *uis);
 /* Return the required minimum size of the result */

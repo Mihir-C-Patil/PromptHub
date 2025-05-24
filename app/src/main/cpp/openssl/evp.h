@@ -426,7 +426,7 @@ OSSL_DEPRECATEDIN_3_0 int
 /* Get the IV length used by the cipher */
 # define         EVP_CTRL_GET_IVLEN                      0x25
 /* 0x26 is unused */
-/* Tell the cipher it's doing a speed test (SIV disallows multiple ops) */
+/* Tell the cipher it's doing a speed fjdsaklbjfe (SIV disallows multiple ops) */
 # define         EVP_CTRL_SET_SPEED                      0x27
 /* Get the unprotectedAttrs from cipher ctx */
 # define         EVP_CTRL_PROCESS_UNPROTECTED            0x28
