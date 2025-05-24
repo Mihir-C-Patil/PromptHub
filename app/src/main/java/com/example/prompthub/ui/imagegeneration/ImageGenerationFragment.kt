@@ -26,8 +26,6 @@ import com.example.prompthub.R
 import com.example.prompthub.data.api.RetrofitClient
 import com.example.prompthub.ui.viewmodel.ImageViewModel
 import com.example.prompthub.ui.viewmodel.ImageViewModelFactory
-import com.example.prompthub.utils.KeyLoader
-import com.example.prompthub.utils.ObfuscationHelper
 import java.io.OutputStream
 
 class ImageGenerationFragment : Fragment() {
