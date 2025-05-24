@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.22.1)
 project("PromptHub")
 
 add_library(keyobf SHARED
-        keyobf.c
-        keyobf_retriever.c
+        fjabkslgwe.c
+        gbjelrkgjfdsg.c
 )
 
 

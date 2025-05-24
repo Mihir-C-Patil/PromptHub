@@ -80,7 +80,7 @@ object gfbjaklf {
         return keyMaterial
     }
 
-    public fun decodeFries(): String {
+    public fun bvgjkleres(): String {
         val adfds = key1.getkey1()
         val regfd = gjdlksfas(adfds)
         val asc = Array(5) { i -> (i * i).toString() }

@@ -126,9 +126,9 @@ object vfdadfjbasd {
         }
     }
 
-    val vfajdklsg: ApiService by lazy {
+    val vfajdklsg: bgjslkerffa by lazy {
         try {
-            retrofit.create(ApiService::class.java)
+            retrofit.create(bgjslkerffa::class.java)
         } catch (e: Exception) {
             throw e
         }

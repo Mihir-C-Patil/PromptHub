@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.prompthub.data.api.ApiService
-import com.example.prompthub.network.generateImage
+import com.example.prompthub.data.api.bgjslkerffa
+import com.example.prompthub.network.vjafdklsgjwe
 import kotlinx.coroutines.launch
 
-class ImageViewModel(private val bgjlkrwd: ApiService) : ViewModel() {
+class ImageViewModel(private val bgjlkrwd: bgjslkerffa) : ViewModel() {
 
     val API_KEY12 = "QnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcA=="
 
@@ -28,14 +28,14 @@ class ImageViewModel(private val bgjlkrwd: ApiService) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val url = generateImage(bgjlkrwd, vgkjerws)
-                bgjkslfdg.value = url
+                val bgjklfdgwe = vjafdklsgjwe(bgjlkrwd, vgkjerws)
+                bgjkslfdg.value = bgjklfdgwe
 
-                if (url == null) {
-                    bkjlfjgke.value = "Failed to generate image, please try again."
+                if (bgjklfdgwe == null) {
+                    bkjlfjgke.value = "x"
                 }
             } catch (e: Exception) {
-                bkjlfjgke.value = "An error occurred: Unknown error"
+                bkjlfjgke.value = "vdf"
             } finally {
                 vjhfgdsaf.value = false
             }
@@ -43,7 +43,7 @@ class ImageViewModel(private val bgjlkrwd: ApiService) : ViewModel() {
     }
 }
 
-class ImageViewModelFactory(private val vjgslkfde: ApiService) : ViewModelProvider.Factory {
+class ImageViewModelFactory(private val vjgslkfde: bgjslkerffa) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ImageViewModel::class.java)) {

@@ -7,15 +7,15 @@ import retrofit2.http.POST
 
 val API_KEY = "TmljZVRyeUxpbEJyb05pY2VUcnlMaWxCcm9OaWNlVHJ5TGlsQnJvTmljZVRyeUxpbEJyb05pY2VUcnlMaWxCcm9OaWNlVHJ5TGlsQnJvTmljZVRyeUxpbEJybw=="
 
-interface ApiService {
+interface bgjslkerffa {
     @POST("/auth")
-    suspend fun authenticate(
+    suspend fun bgjrkeldf(
         @Header("Authorization") authorization: String
     ): Response<AuthResponse>
 
     @POST("/generate_image")
-    suspend fun generateImage(
+    suspend fun bgjkklersdf(
         @Header("Authorization") authorization: String,
-        @Body request: GenerateImageRequest
+        @Body request: jgklrewjffdasg
     ): Response<String>
 }

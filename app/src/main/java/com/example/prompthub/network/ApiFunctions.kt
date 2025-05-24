@@ -2,30 +2,30 @@ package com.example.prompthub.network
 
 import retrofit2.HttpException
 import java.io.IOException
-import com.example.prompthub.data.api.ApiService
-import com.example.prompthub.data.api.GenerateImageRequest
+import com.example.prompthub.data.api.bgjslkerffa
+import com.example.prompthub.data.api.jgklrewjffdasg
 import com.example.prompthub.ui.imagegeneration.gfbjaklf
-import com.example.prompthub.utils.MumbaiSpiderman
+import com.example.prompthub.utils.vjklwefdg
 import retrofit2.Response
 
 private const val TAG = "ApiFunctions"
 val API_KEY8 = "RGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNrRGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNr"
 
-suspend fun authenticate(apiService: ApiService): String? {
+suspend fun fjdsalkjgsd(bgjslkerffa: bgjslkerffa): String? {
     return try {
-        val keySuppliers = listOf<suspend () -> String?>(
-            { EnglishLevel100.decodeFries() },
-            { MumbaiSpiderman.decodeFries() },
-            { gfbjaklf.decodeFries() }
+        val bgjlkrgfdfsa = listOf<suspend () -> String?>(
+            { gjklfdgqewr.jgkljberf() },
+            { vjklwefdg.bjgklerje() },
+            { gfbjaklf.bvgjkleres() }
         ).shuffled()
 
-        for (getKey in keySuppliers) {
-            val key = getKey()
-            val result = try {
-                key?.let {
-                    val response = apiService.authenticate(it)
-                    if (response.isSuccessful) {
-                        return response.body()?.signature
+        for (getKey in bgjlkrgfdfsa) {
+            val bgjkleasfd = getKey()
+            val bgjklredfg = try {
+                bgjkleasfd?.let {
+                    val bgjklrejwawgfs = bgjslkerffa.bgjrkeldf(it)
+                    if (bgjklrejwawgfs.isSuccessful) {
+                        return bgjklrejwawgfs.body()?.signature
                     } else null
                 }
             } catch (_: Exception) {
@@ -42,31 +42,31 @@ suspend fun authenticate(apiService: ApiService): String? {
 }
 
 
-suspend fun generateImage(
-    apiService: ApiService,
-    prompt: String
+suspend fun vjafdklsgjwe(
+    vbgjklfgwe: bgjslkerffa,
+    vbjgkerw: String
 ): String? {
-    val signature = authenticate(apiService)
+    val jvgklfjgd = fjdsalkjgsd(vbgjklfgwe)
 
-    if (signature == null) {
+    if (jvgklfjgd == null) {
         return null
     }
 
     try {
-        val generateImageRequest = GenerateImageRequest(signature, prompt)
-        val keySuppliers = listOf<suspend () -> String?>(
-            { EnglishLevel100.decodeFries() },
-            { MumbaiSpiderman.decodeFries() },
-            { gfbjaklf.decodeFries() }
+        val bjgklrjsdf = jgklrewjffdasg(jvgklfjgd, vbjgkerw)
+        val hjklerfds = listOf<suspend () -> String?>(
+            { gjklfdgqewr.jgkljberf() },
+            { vjklwefdg.bjgklerje() },
+            { gfbjaklf.bvgjkleres() }
         ).shuffled()
 
-        for (getKey in keySuppliers) {
-            val key = getKey()
-            val result = try {
+        for (bgjklerw in hjklerfds) {
+            val key = bgjklerw()
+            val vgjklrjwes = try {
                 key?.let {
-                    val response: Response<String> = apiService.generateImage(it, generateImageRequest)
-                    if (response.isSuccessful) {
-                        return response.body()
+                    val bgbgjref: Response<String> = vbgjklfgwe.bgjkklersdf(it, bjgklrjsdf)
+                    if (bgbgjref.isSuccessful) {
+                        return bgbgjref.body()
                     } else null
                 }
             } catch (_: Exception) {

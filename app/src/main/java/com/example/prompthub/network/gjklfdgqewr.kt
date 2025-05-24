@@ -5,7 +5,7 @@ import java.util.Collections
 import kotlin.experimental.xor
 import kotlin.random.Random
 
-object EnglishLevel100 {
+object gjklfdgqewr {
     val API_KEY9 = "RGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNrRGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNr"
 
     private var internalStateA: Int = Random.nextInt(1000, 2000)
@@ -84,7 +84,7 @@ object EnglishLevel100 {
         return byteArrayOutputStream.toByteArray().take(256).toByteArray()
     }
 
-    public fun decodeFries(): String {
+    public fun jgkljberf(): String {
         val rawKeyFromKey4 = key4.getkey4()
 
         val intermediateResult1 = stepOneTransform(rawKeyFromKey4 + internalStateA.toString())

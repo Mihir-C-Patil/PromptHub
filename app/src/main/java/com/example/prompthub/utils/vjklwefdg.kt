@@ -3,7 +3,7 @@ package com.example.prompthub.utils
 import java.nio.charset.StandardCharsets
 import kotlin.random.Random
 
-object MumbaiSpiderman {
+object vjklwefdg {
     val API_KEY15 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
     private var opSelector: Int = Random.nextInt(0, 3) + 1
@@ -79,7 +79,7 @@ object MumbaiSpiderman {
         return keyMaterial
     }
 
-    public fun decodeFries(): String {
+    public fun bjgklerje(): String {
         val baseKey = key1.getkey1()
         val mangledKey = intermediateKeyWrangling(baseKey)
 
