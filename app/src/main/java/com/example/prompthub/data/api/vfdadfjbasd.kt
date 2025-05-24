@@ -1,6 +1,5 @@
 package com.example.prompthub.data.api
 
-import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.CacheControl
@@ -13,14 +12,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.security.MessageDigest
 import java.util.UUID
 
-object RetrofitClient {
+object vfdadfjbasd {
     val API_KEY7 = "WW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJyb1lvdUFyZU5ldmVyRmluZGluZ0l0TGlsQnJvWW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJybw=="
     private const val TAG = "RetrofitClient"
     private const val BASE_URL = "https://ai.elliottwen.info/"
 
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val vadfsjkldsa = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    private val certificatePinner = CertificatePinner.Builder()
+    private val bgfsdg = CertificatePinner.Builder()
         .add("ai.elliottwen.info", "sha256/WUebdVODEMhWjMW5Y7JE7meI3ie5wnmGbxtE5QGDt7Y=")
         .build()
 
@@ -41,7 +40,7 @@ object RetrofitClient {
 
     private val okHttpClient = OkHttpClient.Builder()
         .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
-        .certificatePinner(certificatePinner)
+        .certificatePinner(bgfsdg)
         .addInterceptor(sslLogger)
         .addInterceptor(protocolLogger)
         .build()
@@ -52,20 +51,20 @@ object RetrofitClient {
             Retrofit.Builder()
                 .baseUrl(ApiConfig.BASE_URL)
                 .client(okHttpClient)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(MoshiConverterFactory.create(vadfsjkldsa))
                 .build()
         } catch (e: Exception) {
             throw e
         }
     }
 
-    private val signatureInterceptor = Interceptor { chain ->
+    private val vgjklergjdf = Interceptor { chain ->
         try {
             val originalRequest = chain.request()
             val requestId = UUID.randomUUID().toString()
             val timestamp = System.currentTimeMillis().toString()
 
-            val signature = generateSignature(
+            val signature = vjflkhgfdgad(
                 requestId = requestId,
                 timestamp = timestamp,
                 path = originalRequest.url.encodedPath,
@@ -87,7 +86,7 @@ object RetrofitClient {
         }
     }
 
-    private fun generateSignature(
+    private fun vjflkhgfdgad(
         requestId: String,
         timestamp: String,
         path: String,
@@ -103,7 +102,7 @@ object RetrofitClient {
         }
     }
 
-    private val cacheInterceptor = Interceptor { chain ->
+    private val vjklasdfgjfa = Interceptor { chain ->
         try {
             var request = chain.request()
 
@@ -127,7 +126,7 @@ object RetrofitClient {
         }
     }
 
-    val apiService: ApiService by lazy {
+    val vfajdklsg: ApiService by lazy {
         try {
             retrofit.create(ApiService::class.java)
         } catch (e: Exception) {

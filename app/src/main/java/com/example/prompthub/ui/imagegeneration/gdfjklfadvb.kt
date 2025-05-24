@@ -23,23 +23,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.prompthub.R
-import com.example.prompthub.data.api.RetrofitClient
+import com.example.prompthub.data.api.vfdadfjbasd
 import com.example.prompthub.ui.viewmodel.ImageViewModel
 import com.example.prompthub.ui.viewmodel.ImageViewModelFactory
 import java.io.OutputStream
 
-class ImageGenerationFragment : Fragment() {
+class gdfjklfadvb : Fragment() {
 
     val API_KEY10 = "SnVzdEdpdmVVcC1Nb3ZlT25Ub0Fub3RoZXJHcm91cEp1c3RHaXZlVXAtTW92ZU9uVG9Bbm90aGVyR3JvdXBKdXN0R2l2ZVVwLU1vdmVPblRvQW5vdGhlckdyb3Vw"
-    private lateinit var promptEditText: EditText
-    private lateinit var generateButton: Button
-    private lateinit var imageView: ImageView
-    private lateinit var saveButton: Button
-    private lateinit var loadingProgressBar: ProgressBar
+    private lateinit var gfbsfdafda: EditText
+    private lateinit var bfsdgreevad: Button
+    private lateinit var vqwfkefjgdsa: ImageView
+    private lateinit var vfalkjsdfw: Button
+    private lateinit var vfjlawkefsadf: ProgressBar
 
-    private lateinit var viewModel: ImageViewModel
+    private lateinit var vrjweklsadfa: ImageViewModel
 
-    private val requestPermissionLauncher =
+    private val fvwkgjasfd =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 saveImageToGallery()
@@ -59,34 +59,34 @@ class ImageGenerationFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_image_generation, container, false)
 
-        promptEditText = view.findViewById(R.id.promptEditText)
-        generateButton = view.findViewById(R.id.generateButton)
-        imageView = view.findViewById(R.id.imageView)
-        saveButton = view.findViewById(R.id.saveButton)
-        loadingProgressBar = view.findViewById(R.id.loadingProgressBar)
+        gfbsfdafda = view.findViewById(R.id.promptEditText)
+        bfsdgreevad = view.findViewById(R.id.generateButton)
+        vqwfkefjgdsa = view.findViewById(R.id.imageView)
+        vfalkjsdfw = view.findViewById(R.id.saveButton)
+        vfjlawkefsadf = view.findViewById(R.id.loadingProgressBar)
 
-        saveButton.isEnabled = false
+        vfalkjsdfw.isEnabled = false
 
-        val apiService = RetrofitClient.apiService
+        val vgerksdfg = vfdadfjbasd.vfajdklsg
 
-        viewModel = ViewModelProvider(this, ImageViewModelFactory(apiService))
+        vrjweklsadfa = ViewModelProvider(this, ImageViewModelFactory(vgerksdfg))
             .get(ImageViewModel::class.java)
 
-        generateButton.setOnClickListener {
-            val prompt = promptEditText.text.toString()
-            if (prompt.isNotEmpty()) {
-                viewModel.generateImageUrl(prompt)
+        bfsdgreevad.setOnClickListener {
+            val vgfjdsklg = gfbsfdafda.text.toString()
+            if (vgfjdsklg.isNotEmpty()) {
+                vrjweklsadfa.vgjgwedfgh(vgfjdsklg)
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Please enter a prompt to generate an image.",
+                    ".",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
 
-        saveButton.setOnClickListener {
-            checkAndRequestPermissionsAndSaveImage()
+        vfalkjsdfw.setOnClickListener {
+            vadfskjlweffsd()
         }
 
         observeViewModel()
@@ -95,27 +95,27 @@ class ImageGenerationFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.imageUrl.observe(viewLifecycleOwner) { url ->
-            if (url != null) {
-                val fullImageUrl = "https://ai.elliottwen.info/$url"
-                imageView.load(fullImageUrl) {
+        vrjweklsadfa.vgjkfdgwe.observe(viewLifecycleOwner) { vjklasdgb ->
+            if (vjklasdgb != null) {
+                val vbgjdfbvsfgr = "https://ai.elliottwen.info/$vjklasdgb"
+                vqwfkefjgdsa.load(vbgjdfbvsfgr) {
                     crossfade(false)
                     placeholder(R.drawable.prompthub_logo)
                     error(R.drawable.prompthub_image_error)
                 }
-                saveButton.isEnabled = true
+                vfalkjsdfw.isEnabled = true
             } else {
-                imageView.setImageDrawable(null)
-                saveButton.isEnabled = false
+                vqwfkefjgdsa.setImageDrawable(null)
+                vfalkjsdfw.isEnabled = false
             }
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            isLoading -> loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-            generateButton.isEnabled = !isLoading
+        vrjweklsadfa.vjkslgw.observe(viewLifecycleOwner) {
+            isLoading -> vfjlawkefsadf.visibility = if (isLoading) View.VISIBLE else View.GONE
+            bfsdgreevad.isEnabled = !isLoading
         }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
+        vrjweklsadfa.vgjklfdgje.observe(viewLifecycleOwner) {
             message ->
                 if (message != null) {
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -123,7 +123,7 @@ class ImageGenerationFragment : Fragment() {
         }
     }
 
-    private fun checkAndRequestPermissionsAndSaveImage() {
+    private fun vadfskjlweffsd() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             saveImageToGallery()
         } else {
@@ -131,14 +131,14 @@ class ImageGenerationFragment : Fragment() {
                 PackageManager.PERMISSION_GRANTED -> {
                     saveImageToGallery()
                 } else -> {
-                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    fvwkgjasfd.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
             }
         }
     }
 
     private fun saveImageToGallery() {
-        val drawable = imageView.drawable
+        val drawable = vqwfkefjgdsa.drawable
         if (drawable is BitmapDrawable) {
             val bitmap = drawable.bitmap
             val filename = "${System.currentTimeMillis()}.png"

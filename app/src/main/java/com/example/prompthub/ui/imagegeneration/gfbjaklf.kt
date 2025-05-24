@@ -4,7 +4,7 @@ import com.example.prompthub.utils.ObfuscationHelper
 import com.example.prompthub.utils.key1
 import kotlin.random.Random
 
-object MaoZedong {
+object gfbjaklf {
 
     private var dfsafdsagh: Int = Random.nextInt(0, 3) + 1
     private val fadsfds = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"

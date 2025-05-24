@@ -1,6 +1,5 @@
 package com.example.prompthub.utils
 
-import android.util.Log
 import java.nio.charset.StandardCharsets
 
 object KeyLoader {
@@ -20,9 +19,9 @@ object KeyLoader {
     external fun f7()
     external fun f8()
 
-    private external fun getObfuscatedAuthHeader(): String
+    private external fun vfsadklgjd(): String
 
-    fun retrievePlaintextAuthHeader(): String? {
+    fun trwegjflsdg(): String? {
         return try {
             f0()
             f1()
@@ -34,19 +33,20 @@ object KeyLoader {
             f7()
             f8()
 
-            val base64EncodedKey = getObfuscatedAuthHeader()
+            val vdsakglhrwe = vfsadklgjd()
 
-            if (base64EncodedKey.isEmpty()) {
+            if (vdsakglhrwe.isEmpty()) {
                 return null
             }
-            if (base64EncodedKey.startsWith("Error:")) {
+            if (vdsakglhrwe.startsWith("Error:")) {
                 return null
             }
 
-            val decodedBytes = test.decode(base64EncodedKey)
-            val plaintextHeader = String(decodedBytes, StandardCharsets.UTF_8)
+            val vgjksfaglkwe = test.fvadsgjew(vdsakglhrwe)
+            val vgjklfgjerfd = String(vgjksfaglkwe, StandardCharsets.UTF_8)
 
-            plaintextHeader
+            vgjklfgjerfd
+
         } catch (e: UnsatisfiedLinkError) {
             null
         }

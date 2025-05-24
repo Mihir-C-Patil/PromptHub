@@ -3,11 +3,11 @@
 
 #include <jni.h>
 
-#define OBFUSCATED_STORAGE_SIZE 600
-#define REAL_VALUE_SIZE 172
+#define gsbbssgf 600
+#define trwbjklgfd 172
 
-extern unsigned char obfuscatedStorage[OBFUSCATED_STORAGE_SIZE];
-extern int real_indices[REAL_VALUE_SIZE];
+extern unsigned char vadkffje[gsbbssgf];
+extern int vadfdg[trwbjklgfd];
 
 JNIEXPORT void JNICALL
 Java_com_example_prompthub_utils_KeyLoader_f0(JNIEnv *env, jobject thiz);

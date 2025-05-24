@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.prompthub.security.logOpenSSLInfo
 import com.example.prompthub.security.logTamperCheckInfo2
-import com.example.prompthub.ui.imagegeneration.ImageGenerationFragment
+import com.example.prompthub.ui.imagegeneration.gdfjklfadvb
 import security.TamperDetectedActivity
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ImageGenerationFragment())
+                .replace(R.id.fragment_container, gdfjklfadvb())
                 .commit()
         }
     }

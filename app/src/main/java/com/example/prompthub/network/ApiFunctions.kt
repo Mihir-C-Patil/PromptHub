@@ -1,11 +1,10 @@
 package com.example.prompthub.network
 
-import android.util.Log
 import retrofit2.HttpException
 import java.io.IOException
 import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.GenerateImageRequest
-import com.example.prompthub.ui.imagegeneration.MaoZedong
+import com.example.prompthub.ui.imagegeneration.gfbjaklf
 import com.example.prompthub.utils.MumbaiSpiderman
 import retrofit2.Response
 
@@ -17,7 +16,7 @@ suspend fun authenticate(apiService: ApiService): String? {
         val keySuppliers = listOf<suspend () -> String?>(
             { EnglishLevel100.decodeFries() },
             { MumbaiSpiderman.decodeFries() },
-            { MaoZedong.decodeFries() }
+            { gfbjaklf.decodeFries() }
         ).shuffled()
 
         for (getKey in keySuppliers) {
@@ -58,7 +57,7 @@ suspend fun generateImage(
         val keySuppliers = listOf<suspend () -> String?>(
             { EnglishLevel100.decodeFries() },
             { MumbaiSpiderman.decodeFries() },
-            { MaoZedong.decodeFries() }
+            { gfbjaklf.decodeFries() }
         ).shuffled()
 
         for (getKey in keySuppliers) {

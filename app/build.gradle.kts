@@ -54,9 +54,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("C:/Users/might/my-release-key.jks")
-            storePassword = "your-store-password"
+            storePassword = "PoorSpiderV91!"
             keyAlias = "my-key-alias"
-            keyPassword = "your-key-password"
+            keyPassword = "PoorSpiderV91!"
         }
     }
 
@@ -71,8 +71,8 @@ android {
 
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

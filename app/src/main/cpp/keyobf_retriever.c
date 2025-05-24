@@ -7,20 +7,20 @@
 #define LOG_TAG "KeyLoaderJNI"
 
 JNIEXPORT jstring JNICALL
-Java_com_example_prompthub_utils_KeyLoader_getObfuscatedAuthHeader(JNIEnv *env, jobject thiz) {
-    char *base64Key = (char *)malloc(173);
+Java_com_example_prompthub_utils_KeyLoader_vfsadklgjd(JNIEnv *env, jobject thiz) {
+    char *vsgfdhh = (char *)malloc(173);
 
-    for (int i = 0; i < REAL_VALUE_SIZE; i++) {
-        int storage_loc = real_indices[i];
-        char currentChar = (char)obfuscatedStorage[storage_loc];
-        base64Key[i] = currentChar;
+    for (int i = 0; i < trwbjklgfd; i++) {
+        int storage_loc = vadfdg[i];
+        char currentChar = (char)vadkffje[storage_loc];
+        vsgfdhh[i] = currentChar;
     }
-    base64Key[REAL_VALUE_SIZE] = '\0';
+    vsgfdhh[trwbjklgfd] = '\0';
 
-    jstring resultJString = (*env)->NewStringUTF(env, base64Key);
+    jstring qtfgaf = (*env)->NewStringUTF(env, vsgfdhh);
 
-    free(base64Key);
-    base64Key = NULL;
+    free(vsgfdhh);
+    vsgfdhh = NULL;
 
-    return resultJString;
+    return qtfgaf;
 }
