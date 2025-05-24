@@ -5,6 +5,8 @@ import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 
+val API_KEY = "TmljZVRyeUxpbEJyb05pY2VUcnlMaWxCcm9OaWNlVHJ5TGlsQnJvTmljZVRyeUxpbEJyb05pY2VUcnlMaWxCcm9OaWNlVHJ5TGlsQnJvTmljZVRyeUxpbEJybw=="
+
 interface ApiService {
     @POST("/auth")
     suspend fun authenticate(

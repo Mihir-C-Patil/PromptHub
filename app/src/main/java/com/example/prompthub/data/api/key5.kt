@@ -5,6 +5,8 @@ import kotlin.random.Random
 
 object key5 {
 
+    val API_KEY6 = "WW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJyb1lvdUFyZU5ldmVyRmluZGluZ0l0TGlsQnJvWW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJybw=="
+
     private const val SEGMENT_LENGTH = 10
     private val saltShaker = listOf("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
 

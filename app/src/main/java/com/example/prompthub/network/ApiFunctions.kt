@@ -10,6 +10,7 @@ import com.example.prompthub.utils.MumbaiSpiderman
 import retrofit2.Response
 
 private const val TAG = "ApiFunctions"
+val API_KEY8 = "RGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNrRGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNr"
 
 suspend fun authenticate(apiService: ApiService): String? {
     return try {

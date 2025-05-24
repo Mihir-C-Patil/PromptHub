@@ -1,6 +1,7 @@
 package com.example.prompthub.utils
 
 object FriesInTheBag {
+    val API_KEY13 = "QnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcA=="
     private val fries = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
     private val inTheBag = IntArray(256) { -1 }.apply {
         for (i in fries.indices) {

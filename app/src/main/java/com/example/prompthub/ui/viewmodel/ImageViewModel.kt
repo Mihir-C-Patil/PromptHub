@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 class ImageViewModel(private val apiService: ApiService) : ViewModel() {
 
+    val API_KEY12 = "QnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcA=="
+
     private val _imageUrl = MutableLiveData<String?>();
     val imageUrl: LiveData<String?> = _imageUrl
 

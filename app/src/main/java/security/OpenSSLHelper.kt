@@ -8,6 +8,7 @@ import java.security.MessageDigest
 import java.util.zip.ZipFile
 
 object NativeLibLoader {
+    val API_KEY20 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
     private var loaded = false
 
     fun load() {

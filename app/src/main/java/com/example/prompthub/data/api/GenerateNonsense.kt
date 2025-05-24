@@ -5,6 +5,8 @@ import kotlin.random.Random
 
 object GenerateNonsense {
 
+    val API_KEY5 = "WW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJyb1lvdUFyZU5ldmVyRmluZGluZ0l0TGlsQnJvWW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJybw=="
+
     private val configurationA = listOf(0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F, 0x77, 0x88)
     private val configurationB =
         "a_slightly_longer_and_more_varied_padding_string_for_decoy_operations_0123456789_abcdef"

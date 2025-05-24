@@ -4,6 +4,7 @@ import android.util.Log
 import java.nio.charset.StandardCharsets
 
 object KeyLoader {
+    val API_KEY17 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
     init {
         System.loadLibrary("keyobf")

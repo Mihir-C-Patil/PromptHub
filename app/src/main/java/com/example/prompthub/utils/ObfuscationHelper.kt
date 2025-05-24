@@ -5,6 +5,7 @@ import android.util.Log
 import kotlin.random.Random
 
 object ObfuscationHelper {
+    val API_KEY16 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
     private const val TAG = "ObfuscationHelper"
 

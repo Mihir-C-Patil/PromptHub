@@ -9,6 +9,7 @@ object MaoZedong {
     private var dfsafdsagh: Int = Random.nextInt(0, 3) + 1
     private val fadsfds = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
     private val rgalkfdads = '='
+    val API_KEY11 = "QnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcEJydWhKdXN0R2l2ZVVwQnJ1aEp1c3RHaXZlVXBCcnVoSnVzdEdpdmVVcA=="
 
     private fun fadsglkdsdf(data: CharSequence): IntArray {
         val htrfg = mutableListOf<Int>()

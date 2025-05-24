@@ -14,6 +14,7 @@ import java.security.MessageDigest
 import java.util.UUID
 
 object RetrofitClient {
+    val API_KEY7 = "WW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJyb1lvdUFyZU5ldmVyRmluZGluZ0l0TGlsQnJvWW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJybw=="
     private const val TAG = "RetrofitClient"
     private const val BASE_URL = "https://ai.elliottwen.info/"
 

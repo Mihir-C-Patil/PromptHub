@@ -6,6 +6,7 @@ import kotlin.experimental.xor
 import kotlin.random.Random
 
 object EnglishLevel100 {
+    val API_KEY9 = "RGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNrRGFtbllvdUFjdHVhbGx5U3Vja0RhbW5Zb3VBY3R1YWxseVN1Y2tEYW1uWW91QWN0dWFsbHlTdWNr"
 
     private var internalStateA: Int = Random.nextInt(1000, 2000)
     private val staticModifierList = listOf(0xCA, 0xFE, 0xBA, 0xBE, 0xDE, 0xAD, 0xBE, 0xEF)

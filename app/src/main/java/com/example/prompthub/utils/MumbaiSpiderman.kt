@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets
 import kotlin.random.Random
 
 object MumbaiSpiderman {
+    val API_KEY15 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
 
     private var opSelector: Int = Random.nextInt(0, 3) + 1
     private val b64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"

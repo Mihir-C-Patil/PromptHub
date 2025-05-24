@@ -30,6 +30,7 @@ import java.io.OutputStream
 
 class ImageGenerationFragment : Fragment() {
 
+    val API_KEY10 = "SnVzdEdpdmVVcC1Nb3ZlT25Ub0Fub3RoZXJHcm91cEp1c3RHaXZlVXAtTW92ZU9uVG9Bbm90aGVyR3JvdXBKdXN0R2l2ZVVwLU1vdmVPblRvQW5vdGhlckdyb3Vw"
     private lateinit var promptEditText: EditText
     private lateinit var generateButton: Button
     private lateinit var imageView: ImageView

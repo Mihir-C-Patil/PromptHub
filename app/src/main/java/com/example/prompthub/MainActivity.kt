@@ -9,7 +9,7 @@ import com.example.prompthub.ui.imagegeneration.ImageGenerationFragment
 import security.TamperDetectedActivity
 
 class MainActivity : AppCompatActivity() {
-
+    val API_KEY18 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
