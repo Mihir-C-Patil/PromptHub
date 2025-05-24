@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         // Simple test
         logOpenSSLInfo()
-        //logTamperCheckInfo(this)
+        logTamperCheckInfo(this)
         val isUntampered = logTamperCheckInfo2(this)
         if (!isUntampered) {
             // Show red screen if tampered

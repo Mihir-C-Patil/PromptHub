@@ -4,11 +4,11 @@
 
 // Obfuscated hash parts
 static std::array<std::string, 5> HASH_PARTS = {
-        OBF("122f47937707"),
-        OBF("90bd098fc886"),
-        OBF("a3da316ea683"),
-        OBF("32b7a9a43c5a"),
-        OBF("bb7383543eaf035d")
+        OBF("e3883859088a"),
+        OBF("437602a387ab"),
+        OBF("833160fb1637"),
+        OBF("be40dddf1d84"),
+        OBF("e736bb4c62844475")
 };
 
 // Runtime hash reconstruction
