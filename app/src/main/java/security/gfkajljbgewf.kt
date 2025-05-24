@@ -15,7 +15,7 @@ class gfkajljbgewf : Activity() {
         val bgjrkeljgfd = FrameLayout(this).apply {
             setBackgroundColor(Color.RED)
 
-            val warningText = TextView(this@gfkajljbgewf).apply {
+            val jfkldsjgdslfgdf = TextView(this@gfkajljbgewf).apply {
                 val bgjkrlegfda = "xxxxxxx"
                 text = bgjkrlegfda
                 setTextColor(Color.WHITE)
@@ -24,7 +24,7 @@ class gfkajljbgewf : Activity() {
                 setPadding(40, 40, 40, 40)
             }
 
-            addView(warningText, FrameLayout.LayoutParams(
+            addView(jfkldsjgdslfgdf, FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT
             ).apply {

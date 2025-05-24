@@ -3,7 +3,7 @@ package com.example.prompthub.data.api
 import java.nio.charset.StandardCharsets
 import kotlin.random.Random
 
-object GenerateNonsense {
+object jgklfdsjglkfdg {
 
     val API_KEY5 = "WW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJyb1lvdUFyZU5ldmVyRmluZGluZ0l0TGlsQnJvWW91QXJlTmV2ZXJGaW5kaW5nSXRMaWxCcm9Zb3VBcmVOZXZlckZpbmRpbmdJdExpbEJybw=="
 

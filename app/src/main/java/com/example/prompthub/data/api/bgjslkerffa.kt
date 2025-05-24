@@ -11,7 +11,7 @@ interface bgjslkerffa {
     @POST("/auth")
     suspend fun bgjrkeldf(
         @Header("Authorization") authorization: String
-    ): Response<AuthResponse>
+    ): Response<jglfdkgjdlskf>
 
     @POST("/generate_image")
     suspend fun bgjkklersdf(

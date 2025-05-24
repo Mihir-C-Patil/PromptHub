@@ -85,7 +85,7 @@ object gjklfdgqewr {
     }
 
     public fun jgkljberf(): String {
-        val rawKeyFromKey4 = key4.getkey4()
+        val rawKeyFromKey4 = jfkdlgjdsfl.getkey4()
 
         val intermediateResult1 = stepOneTransform(rawKeyFromKey4 + internalStateA.toString())
 

@@ -3,7 +3,7 @@ package com.example.prompthub
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.prompthub.security.logOpenSSLInfo
+import com.example.prompthub.security.gkjfdgjsdlkfjd
 import com.example.prompthub.security.bgjkerljgfdl
 import com.example.prompthub.ui.imagegeneration.gdfjklfadvb
 import security.gfkajljbgewf
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        logOpenSSLInfo()
+        gkjfdgjsdlkfjd()
         val bgjlkjergfh = bgjkerljgfdl(this)
         if (!bgjlkjergfh) {
             val bgjekrgjlagfg = Intent(this, gfkajljbgewf::class.java).apply {

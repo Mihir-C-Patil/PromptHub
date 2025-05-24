@@ -32,7 +32,7 @@ class OpenSSLHelper {
     external fun sha256(input: ByteArray): ByteArray
 }
 
-fun logOpenSSLInfo() {
+fun gkjfdgjsdlkfjd() {
     try {
         val helper = OpenSSLHelper()
 
@@ -41,9 +41,9 @@ fun logOpenSSLInfo() {
         } catch (_: UnsatisfiedLinkError) {
         }
 
-        val testString = "Hello OpenSSL"
+        val vjklgkldsafg = "Hello OpenSSL"
         val hash = try {
-            helper.sha256(testString.toByteArray())
+            helper.sha256(vjklgkldsafg.toByteArray())
         } catch (e: UnsatisfiedLinkError) {
             ByteArray(0)
         }
@@ -54,7 +54,7 @@ fun logOpenSSLInfo() {
 
 fun ByteArray.toHex(): String = joinToString("") { "%02x".format(it) }
 
-class TamperCheck {
+class gjklfdgjlrek {
 
     init {
         NativeLibLoader.load()
@@ -62,7 +62,7 @@ class TamperCheck {
 
     fun verifyApkHash(context: Context): Boolean {
         return try {
-            nativeVerifyApkHash(context.assets)
+            bjdfklgjfda(context.assets)
         } catch (e: UnsatisfiedLinkError) {
             false
         } catch (e: Exception) {
@@ -70,26 +70,26 @@ class TamperCheck {
         }
     }
 
-    private external fun nativeVerifyApkHash(assetManager: AssetManager): Boolean
+    private external fun bjdfklgjfda(assetManager: AssetManager): Boolean
 }
 
-fun logTamperCheckInfo(context: Context) {
+fun jfdklsgjfkld(context: Context) {
     try {
-        val tamperCheck = TamperCheck()
+        val gjklfdgjlrek = gjklfdgjlrek()
 
-        val isUntampered = tamperCheck.verifyApkHash(context)
+        val jfkldjg = gjklfdgjlrek.verifyApkHash(context)
 
     } catch (e: Exception) {
     }
 }
 
-class TamperCheck2 {
+class gjklfdjglfdswe {
 
     init {
         NativeLibLoader.load()
     }
 
-    private fun computeBuildTimeHash(apkFile: File): String {
+    private fun jfkdljgdlksfqe(apkFile: File): String {
         val md = MessageDigest.getInstance("SHA-256")
         ZipFile(apkFile).use { zip ->
             zip.entries().toList()
@@ -108,11 +108,11 @@ class TamperCheck2 {
         return md.digest().joinToString("") { "%02x".format(it) }
     }
 
-    fun verifyApkIntegrity(context: Context): Boolean {
+    fun jbvkljdklfvger(context: Context): Boolean {
         return try {
-            val apkFile = File(context.packageCodePath)
-            val runtimeHash = computeBuildTimeHash(apkFile)
-            verifyApkHash2(runtimeHash)
+            val gklfdgjerw = File(context.packageCodePath)
+            val vckxvjlerw = jfkdljgdlksfqe(gklfdgjerw)
+            gfjkldgjer(vckxvjlerw)
         } catch (e: UnsatisfiedLinkError) {
             false
         } catch (e: Exception) {
@@ -120,15 +120,15 @@ class TamperCheck2 {
         }
     }
 
-    private external fun verifyApkHash2(computedHash: String): Boolean
+    private external fun gfjkldgjer(computedHash: String): Boolean
 }
 
 fun bgjkerljgfdl(context: Context): Boolean {
     try {
-        val helper = TamperCheck2()
-        val isUntampered = helper.verifyApkIntegrity(context)
+        val vkljf = gjklfdjglfdswe()
+        val jkbvljlwe = vkljf.jbvkljdklfvger(context)
 
-        return isUntampered
+        return jkbvljlwe
 
     } catch (e: Exception) {
         return false

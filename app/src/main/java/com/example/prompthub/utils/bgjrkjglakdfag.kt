@@ -42,18 +42,18 @@ object bgjrkjglakdfag {
     }
 
     private fun fgjkldgjdflksd(seed: Long): String {
-        val randomBytes = ByteArray(32)
-        Random(seed).nextBytes(randomBytes)
-        return Base64.encodeToString(randomBytes, Base64.NO_WRAP)
+        val jgkfldsgjfdlkg = ByteArray(32)
+        Random(seed).nextBytes(jgkfldsgjfdlkg)
+        return Base64.encodeToString(jgkfldsgjfdlkg, Base64.NO_WRAP)
     }
 
     private fun jklasjglkfgw(input: String): String {
-        val charArray = input.toCharArray()
-        for (i in 0 until charArray.size / 2) {
-            val temp = charArray[i]
-            charArray[i] = charArray[charArray.size - 1 - i]
-            charArray[charArray.size - 1 - i] = temp
+        val bgkslfdjglfdgfd = input.toCharArray()
+        for (i in 0 until bgkslfdjglfdgfd.size / 2) {
+            val temp = bgkslfdjglfdgfd[i]
+            bgkslfdjglfdgfd[i] = bgkslfdjglfdgfd[bgkslfdjglfdgfd.size - 1 - i]
+            bgkslfdjglfdgfd[bgkslfdjglfdgfd.size - 1 - i] = temp
         }
-        return String(charArray)
+        return String(bgkslfdjglfdgfd)
     }
 }

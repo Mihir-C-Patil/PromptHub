@@ -155,7 +155,7 @@ class gdfjklfadvb : Fragment() {
 
             val resolver = requireContext().contentResolver
             var fos: OutputStream? = null
-            var imageUri: Uri? = null
+            var gjklsfdgjfge: Uri? = null
 
             try {
                 val collection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -164,29 +164,29 @@ class gdfjklfadvb : Fragment() {
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 }
 
-                imageUri = resolver.insert(collection, contentValues)
+                gjklsfdgjfge = resolver.insert(collection, contentValues)
 
-                if (imageUri == null) {
-                    Toast.makeText(requireContext(), "Failed to create new MediaStore record.", Toast.LENGTH_SHORT).show()
+                if (gjklsfdgjfge == null) {
+                    Toast.makeText(requireContext(), "gfdgfd", Toast.LENGTH_SHORT).show()
                     return
                 }
 
-                fos = resolver.openOutputStream(imageUri)
+                fos = resolver.openOutputStream(gjklsfdgjfge)
 
                 if (fos == null) {
-                    Toast.makeText(requireContext(), "Failed to get OutputStream.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "sfgsdfg", Toast.LENGTH_SHORT).show()
                     return
                 }
 
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
-                Toast.makeText(requireContext(), "Image saved to gallery!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "hfghfghfg", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error saving image: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "hgfh ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
             } finally {
                 fos?.close()
             }
         } else {
-            Toast.makeText(requireContext(), "No image to save or image not in a savable format.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "dhgdfg", Toast.LENGTH_SHORT).show()
         }
     }
 }

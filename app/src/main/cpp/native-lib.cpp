@@ -7,7 +7,7 @@
 #include <android/asset_manager_jni.h>
 #include "generated/expected_hash.h"
 
-#define LOG_TAG "TamperCheck"
+#define LOG_TAG "gjklfdgjlrek"
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 const char* EXPECTED_APK_HASH = getExpectedHash();
@@ -111,7 +111,7 @@ void hash_res_directory(AAssetManager* mgr, SHA256_CTX* sha_ctx, const std::stri
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
+Java_com_example_prompthub_security_gjklfdgjlrek_bjdfklgjfda(
     JNIEnv* env, jobject thiz, jobject assetManager) {
     AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
     if (!mgr) {
@@ -154,7 +154,7 @@ Java_com_example_prompthub_security_TamperCheck_nativeVerifyApkHash(
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_example_prompthub_security_TamperCheck2_verifyApkHash2(
+Java_com_example_prompthub_security_gjklfdjglfdswe_gfjkldgjer(
         JNIEnv* env, jobject thiz, jstring computedHashJava) {
 
     const char* computedHash = env->GetStringUTFChars(computedHashJava, nullptr);
