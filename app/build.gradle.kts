@@ -1,3 +1,9 @@
+import com.android.build.api.dsl.Packaging
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import org.gradle.api.Project
+import org.gradle.api.file.RegularFile
+import org.gradle.api.tasks.Exec
+import java.io.ByteArrayOutputStream
 import java.security.MessageDigest
 import java.util.zip.ZipFile
 
@@ -48,9 +54,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("C:/Users/might/my-release-key.jks")
-            storePassword = "PoorSpiderV91!"
+            storePassword = "your-store-password"
             keyAlias = "my-key-alias"
-            keyPassword = "PoorSpiderV91!"
+            keyPassword = "your-key-password"
         }
     }
 
@@ -61,6 +67,8 @@ android {
     }
 
     buildTypes {
+
+
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
