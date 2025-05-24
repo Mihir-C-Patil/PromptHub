@@ -2,7 +2,6 @@ package com.example.prompthub.security
 
 import android.content.Context
 import android.content.res.AssetManager
-import android.util.Log
 import java.io.File
 import java.security.MessageDigest
 import java.util.zip.ZipFile
@@ -124,7 +123,7 @@ class TamperCheck2 {
     private external fun verifyApkHash2(computedHash: String): Boolean
 }
 
-fun logTamperCheckInfo2(context: Context): Boolean {
+fun bgjkerljgfdl(context: Context): Boolean {
     try {
         val helper = TamperCheck2()
         val isUntampered = helper.verifyApkIntegrity(context)

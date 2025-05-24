@@ -7,17 +7,17 @@ import android.widget.TextView
 import android.widget.FrameLayout
 import android.view.Gravity
 
-class TamperDetectedActivity : Activity() {
+class gfkajljbgewf : Activity() {
     val API_KEY21 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(ngbgreag: Bundle?) {
+        super.onCreate(ngbgreag)
 
-        val root = FrameLayout(this).apply {
+        val bgjrkeljgfd = FrameLayout(this).apply {
             setBackgroundColor(Color.RED)
 
-            val warningText = TextView(this@TamperDetectedActivity).apply {
-                val message = "⚠️ Application Tampered!\nThis app has been modified or is not genuine."
-                text = message
+            val warningText = TextView(this@gfkajljbgewf).apply {
+                val bgjkrlegfda = "xxxxxxx"
+                text = bgjkrlegfda
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 gravity = Gravity.CENTER
@@ -32,7 +32,7 @@ class TamperDetectedActivity : Activity() {
             })
         }
 
-        setContentView(root)
+        setContentView(bgjrkeljgfd)
 
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_FULLSCREEN or

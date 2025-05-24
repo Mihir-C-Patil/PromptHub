@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.prompthub.security.logOpenSSLInfo
-import com.example.prompthub.security.logTamperCheckInfo2
+import com.example.prompthub.security.bgjkerljgfdl
 import com.example.prompthub.ui.imagegeneration.gdfjklfadvb
-import security.TamperDetectedActivity
+import security.gfkajljbgewf
 
 class MainActivity : AppCompatActivity() {
     val API_KEY18 = "WW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2VyWW91QXJlQUxvc2Vy=="
@@ -14,12 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         logOpenSSLInfo()
-        val isUntampered = logTamperCheckInfo2(this)
-        if (!isUntampered) {
-            val intent = Intent(this, TamperDetectedActivity::class.java).apply {
+        val bgjlkjergfh = bgjkerljgfdl(this)
+        if (!bgjlkjergfh) {
+            val bgjekrgjlagfg = Intent(this, gfkajljbgewf::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
-            startActivity(intent)
+            startActivity(bgjekrgjlagfg)
             return
         }
 
