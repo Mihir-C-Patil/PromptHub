@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets
 import java.util.Collections
 import kotlin.experimental.xor
 import kotlin.random.Random
-import kotlin.text.toByte
 
 object EnglishLevel100 {
 

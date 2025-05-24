@@ -11,7 +11,6 @@ class TamperDetectedActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Fullscreen red background
         val root = FrameLayout(this).apply {
             setBackgroundColor(Color.RED)
 
@@ -34,7 +33,6 @@ class TamperDetectedActivity : Activity() {
 
         setContentView(root)
 
-        // Prevent back navigation or interaction
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -42,6 +40,5 @@ class TamperDetectedActivity : Activity() {
     }
 
     override fun onBackPressed() {
-        // Disable back press
     }
 }

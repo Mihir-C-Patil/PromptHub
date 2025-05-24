@@ -5,10 +5,8 @@ import retrofit2.HttpException
 import java.io.IOException
 import com.example.prompthub.data.api.ApiService
 import com.example.prompthub.data.api.GenerateImageRequest
-import com.example.prompthub.data.api.GenerateNonsense
 import com.example.prompthub.ui.imagegeneration.MaoZedong
 import com.example.prompthub.utils.MumbaiSpiderman
-import com.example.prompthub.utils.ObfuscationHelper
 import retrofit2.Response
 
 private const val TAG = "ApiFunctions"

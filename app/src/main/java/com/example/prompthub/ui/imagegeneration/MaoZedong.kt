@@ -1,9 +1,7 @@
 package com.example.prompthub.ui.imagegeneration
 
-import android.util.Log
 import com.example.prompthub.utils.ObfuscationHelper
 import com.example.prompthub.utils.key1
-import java.nio.charset.StandardCharsets
 import kotlin.random.Random
 
 object MaoZedong {

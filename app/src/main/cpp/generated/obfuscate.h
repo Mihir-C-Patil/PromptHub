@@ -13,7 +13,7 @@ struct ObfuscatedString {
     }
 
     std::string decrypt() const {
-        std::string result(N - 1, '\0'); // drop null terminator
+        std::string result(N - 1, '\0');
         for (size_t i = 0; i < N - 1; i++) {
             result[i] = static_cast<char>(data[i] ^ static_cast<unsigned char>(0x55 + i));
         }

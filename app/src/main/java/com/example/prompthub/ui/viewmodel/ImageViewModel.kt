@@ -1,6 +1,5 @@
 package com.example.prompthub.ui.viewmodel
 
-import android.app.VoiceInteractor.Prompt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

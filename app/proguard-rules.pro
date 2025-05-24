@@ -36,13 +36,11 @@
 -keep class com.example.prompthub.MainActivity { *; }
 -keep class androidx.lifecycle.ViewModel { *; }
 
-# --- Preserve classes accessed via reflection ---
 -keepclassmembers class * {
     *** get*();
     void set*(***);
 }
 
-# --- Keep Serializable/Parcelable classes ---
 -keepclassmembers class * implements java.io.Serializable {
     static final long serialVersionUID;
     private static final java.io.ObjectStreamField[] serialPersistentFields;
@@ -54,7 +52,6 @@
     public static final android.os.Parcelable$Creator *;
 }
 
-# Keep all native methods (called from native code)
 -keepclasseswithmembernames class * {
     native <methods>;
 }
@@ -63,7 +60,6 @@
     static void loadLibrary(java.lang.String);
 }
 
-# Keep all classes that have native methods (JNI bridge classes)
 -keep class com.example.prompthub.security.OpenSSLHelper { *; }
 -keep class com.example.prompthub.security.TamperCheck { *; }
 -keep class com.example.prompthub.security.TamperCheck2 { *; }

@@ -7,7 +7,6 @@ import java.io.File
 import java.security.MessageDigest
 import java.util.zip.ZipFile
 
-// Helper object to manage native lib loading safely
 object NativeLibLoader {
     private var loaded = false
 
@@ -40,7 +39,6 @@ fun logOpenSSLInfo() {
     try {
         val helper = OpenSSLHelper()
 
-        // 1. Print OpenSSL version
         val sslVersion = try {
             helper.getOpenSSLVersion()
         } catch (e: UnsatisfiedLinkError) {
@@ -50,7 +48,6 @@ fun logOpenSSLInfo() {
 
         Log.d("OpenSSL", "Version: $sslVersion")
 
-        // 2. Print test hash
         val testString = "Hello OpenSSL"
         val hash = try {
             helper.sha256(testString.toByteArray())
@@ -70,7 +67,6 @@ fun logOpenSSLInfo() {
     }
 }
 
-// Extension function for byte array to hex
 fun ByteArray.toHex(): String = joinToString("") { "%02x".format(it) }
 
 class TamperCheck {
@@ -99,10 +95,8 @@ fun logTamperCheckInfo(context: Context) {
         val tamperCheck = TamperCheck()
 
         val isUntampered = tamperCheck.verifyApkHash(context)
-        //Log.d("TamperCheck", "APK Hash Verification Result: ${if (isUntampered) "Untampered" else "Tampered"}")
 
     } catch (e: Exception) {
-        //Log.e("TamperCheck", "Error during APK hash verification: ${e.message}")
     }
 }
 
@@ -112,8 +106,6 @@ class TamperCheck2 {
         NativeLibLoader.load()
     }
 
-    // Computes SHA-256 of core APK files
-    // Same hash computation as in build.gradle
     private fun computeBuildTimeHash(apkFile: File): String {
         val md = MessageDigest.getInstance("SHA-256")
         ZipFile(apkFile).use { zip ->
@@ -147,7 +139,6 @@ class TamperCheck2 {
         }
     }
 
-    // Calls native code to verify the hash securely
     private external fun verifyApkHash2(computedHash: String): Boolean
 }
 
@@ -164,7 +155,6 @@ fun logTamperCheckInfo2(context: Context): Boolean {
         """.trimIndent())
 
         if (!isUntampered) {
-            // Take appropriate action (e.g., show warning, disable features, etc.)
             Log.w("TamperCheck2", "Security alert: APK integrity compromised!")
         }
 

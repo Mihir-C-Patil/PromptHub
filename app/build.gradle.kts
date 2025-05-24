@@ -35,7 +35,6 @@ android {
 
     packaging {
         resources {
-            //resources.excludes += setOf("*.dex", "*.arsc", "*.xml")
             resources.pickFirsts.add("**/libssl.so")
             resources.pickFirsts.add("**/libcrypto.so")
         }
@@ -95,7 +94,6 @@ android {
                 .filter { it.name.matches(Regex("classes.dex|resources.arsc|AndroidManifest.xml|res/.*")) }
                 .sortedBy { it.name }
                 .forEach { entry ->
-                    // Hash the compressed bytes (no need for compressedSize)
                     zip.getInputStream(entry).use { input ->
                         val buffer = ByteArray(8192)
                         var bytesRead: Int
@@ -126,17 +124,14 @@ android {
                         mkdirs()
                     }
 
-                    // Compute the APK hash
                     val hash = computeApkHash(apkFile)
 
-                    // Split hash into 5 parts
                     val parts = List(5) { i ->
                         val start = i * (hash.length / 5)
                         val end = if (i == 4) hash.length else (i + 1) * (hash.length / 5)
                         hash.substring(start, end)
                     }
 
-                    // Write the obfuscated header file
                     headerDir.resolve("expected_hash.h").writeText(
                         """
                     // Auto-generated - DO NOT EDIT
@@ -187,15 +182,15 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // OkHttp dependency
+
     implementation(libs.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.glide) // Use latest Glide version
-    annotationProcessor(libs.compiler)  // Required for Glide's annotation processor
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
@@ -203,9 +198,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
 
-    // Coroutines for asynchronous operations
     implementation(libs.kotlinx.coroutines.android)
 
-    // Image Loading (Coil)
     implementation(libs.coil)
 }

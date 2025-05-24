@@ -12,8 +12,7 @@ Java_com_example_prompthub_utils_KeyLoader_getObfuscatedAuthHeader(JNIEnv *env, 
 
     for (int i = 0; i < REAL_VALUE_SIZE; i++) {
         int storage_loc = real_indices[i];
-        char currentChar = (char)obfuscatedStorage[storage_loc]; // Store for logging
-
+        char currentChar = (char)obfuscatedStorage[storage_loc];
         base64Key[i] = currentChar;
     }
     base64Key[REAL_VALUE_SIZE] = '\0';
