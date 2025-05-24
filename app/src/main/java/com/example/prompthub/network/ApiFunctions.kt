@@ -38,7 +38,6 @@ suspend fun authenticate(apiService: ApiService): String? {
 
         null
     } catch (e: Exception) {
-        Log.e("Auth", "Unexpected error during authentication", e)
         null
     }
 }
@@ -51,7 +50,6 @@ suspend fun generateImage(
     val signature = authenticate(apiService)
 
     if (signature == null) {
-        Log.e(TAG, "Failed to get signature for image generation.")
         return null
     }
 
@@ -80,13 +78,10 @@ suspend fun generateImage(
         }
 
     } catch (e: IOException) {
-        Log.e(TAG, "Network error during image generation", e)
         null
     } catch (e: HttpException) {
-        Log.e(TAG, "HTTP error during image generation: ${e.code()}", e)
         null
     } catch (e: Exception) {
-        Log.e(TAG, "Unexpected error during image generation", e)
         null
     }
     return null

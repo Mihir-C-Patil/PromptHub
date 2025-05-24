@@ -16,11 +16,8 @@ object NativeLibLoader {
             try {
                 System.loadLibrary("native-lib")
                 loaded = true
-                Log.d("NativeLibLoader", "native-lib loaded successfully")
             } catch (e: UnsatisfiedLinkError) {
-                Log.e("NativeLibLoader", "Failed to load native-lib", e)
             } catch (e: Exception) {
-                Log.e("NativeLibLoader", "Unexpected error loading native-lib", e)
             }
         }
     }
@@ -42,29 +39,17 @@ fun logOpenSSLInfo() {
 
         val sslVersion = try {
             helper.getOpenSSLVersion()
-        } catch (e: UnsatisfiedLinkError) {
-            Log.e("OpenSSL", "Native lib not loaded or method missing", e)
-            "Unknown"
+        } catch (_: UnsatisfiedLinkError) {
         }
-
-        Log.d("OpenSSL", "Version: $sslVersion")
 
         val testString = "Hello OpenSSL"
         val hash = try {
             helper.sha256(testString.toByteArray())
         } catch (e: UnsatisfiedLinkError) {
-            Log.e("OpenSSL", "Native lib not loaded or method missing", e)
             ByteArray(0)
         }
 
-        if (hash.isNotEmpty()) {
-            Log.d("OpenSSL", "SHA-256 of '$testString': ${hash.toHex()}")
-        } else {
-            Log.w("OpenSSL", "SHA-256 computation skipped due to native lib issue")
-        }
-
-    } catch (e: Exception) {
-        Log.e("OpenSSL", "Error: ${e.message}")
+    } catch (_: Exception) {
     }
 }
 
@@ -80,10 +65,8 @@ class TamperCheck {
         return try {
             nativeVerifyApkHash(context.assets)
         } catch (e: UnsatisfiedLinkError) {
-            Log.e("TamperCheck", "Native lib not loaded or method missing", e)
             false
         } catch (e: Exception) {
-            Log.e("TamperCheck", "Error during APK hash verification", e)
             false
         }
     }
@@ -132,10 +115,8 @@ class TamperCheck2 {
             val runtimeHash = computeBuildTimeHash(apkFile)
             verifyApkHash2(runtimeHash)
         } catch (e: UnsatisfiedLinkError) {
-            Log.e("TamperCheck2", "Native lib not loaded or method missing", e)
             false
         } catch (e: Exception) {
-            Log.e("TamperCheck2", "APK verification failed", e)
             false
         }
     }
@@ -148,26 +129,9 @@ fun logTamperCheckInfo2(context: Context): Boolean {
         val helper = TamperCheck2()
         val isUntampered = helper.verifyApkIntegrity(context)
 
-        Log.d("TamperCheck2", """
-        APK Integrity Check Results:
-        ---------------------------
-        Verification Status: ${if (isUntampered) "Untampered" else "Tampered"}
-        Verification Method: Core APK files hash check
-        """.trimIndent())
-
-        if (!isUntampered) {
-            Log.w("TamperCheck2", "Security alert: APK integrity compromised!")
-        }
-
         return isUntampered
 
     } catch (e: Exception) {
-        Log.e("TamperCheck2", """
-        APK Integrity Check Failed:
-        --------------------------
-        Error: ${e.message}
-        Stacktrace: ${e.stackTraceToString()}
-        """.trimIndent())
         return false
     }
 }

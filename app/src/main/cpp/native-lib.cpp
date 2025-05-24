@@ -159,7 +159,6 @@ Java_com_example_prompthub_security_TamperCheck2_verifyApkHash2(
 
     const char* computedHash = env->GetStringUTFChars(computedHashJava, nullptr);
     if (computedHash == nullptr) {
-        LOGE("Failed to get computed hash string");
         return false;
     }
 

@@ -48,11 +48,9 @@ object KeyLoader {
 
             plaintextHeader
         } catch (e: UnsatisfiedLinkError) {
-            Log.e("KeyLoader", "Native method not found. Ensure library is loaded, method names match, and NDK is configured.", e)
             null
         }
         catch (e: Exception) {
-            Log.e("KeyLoader", "An unexpected error occurred during key retrieval.", e)
             null
         }
     }

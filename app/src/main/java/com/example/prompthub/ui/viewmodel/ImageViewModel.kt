@@ -35,7 +35,7 @@ class ImageViewModel(private val apiService: ApiService) : ViewModel() {
                     _errorMessage.value = "Failed to generate image, please try again."
                 }
             } catch (e: Exception) {
-                _errorMessage.value = "An error occurred: ${e.localizedMessage ?: "Unknown error"}"
+                _errorMessage.value = "An error occurred: Unknown error"
             } finally {
                 _isLoading.value = false
             }

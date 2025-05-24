@@ -29,13 +29,6 @@ object RetrofitClient {
         val response = chain.proceed(request)
 
         val handshake = response.handshake
-        if (handshake != null) {
-            Log.d(TAG, "SSL/TLS Connection Status:")
-            Log.d(TAG, "Protocol: ${handshake.tlsVersion}")
-            Log.d(TAG, "Cipher Suite: ${handshake.cipherSuite}")
-            Log.d(TAG, "Connection: ${if (request.isHttps) "Secure (HTTPS)" else "Insecure (HTTP)"}")
-        }
-
         response
     }
 
@@ -43,7 +36,6 @@ object RetrofitClient {
         val request = chain.request()
         val response = chain.proceed(request)
         val protocol = response.protocol.toString()
-        Log.d(TAG, "Request to ${request.url} using protocol: $protocol")
         response
     }
 
@@ -56,9 +48,6 @@ object RetrofitClient {
 
     private val retrofit: Retrofit by lazy {
         try {
-            Log.d(TAG, "🔒 Security: Initializing API client")
-            Log.d(TAG, "  ├─ Base URL: ${ApiConfig.BASE_URL}")
-            Log.d(TAG, "  └─ Converter: Moshi")
 
             Retrofit.Builder()
                 .baseUrl(ApiConfig.BASE_URL)
@@ -66,7 +55,6 @@ object RetrofitClient {
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
         } catch (e: Exception) {
-            Log.e(TAG, "❌ API Error: ${e.message}")
             throw e
         }
     }
@@ -76,11 +64,6 @@ object RetrofitClient {
             val originalRequest = chain.request()
             val requestId = UUID.randomUUID().toString()
             val timestamp = System.currentTimeMillis().toString()
-
-            Log.d(RetrofitClient.TAG, "🔒 Security: Request signing initiated")
-            Log.d(RetrofitClient.TAG, "  ├─ URL: ${originalRequest.url}")
-            Log.d(RetrofitClient.TAG, "  ├─ Request ID: $requestId")
-            Log.d(RetrofitClient.TAG, "  └─ Timestamp: $timestamp")
 
             val signature = generateSignature(
                 requestId = requestId,
@@ -97,13 +80,9 @@ object RetrofitClient {
 
             val response = chain.proceed(newRequest)
 
-            Log.d(RetrofitClient.TAG, "🔒 Security: Response received")
-            Log.d(RetrofitClient.TAG, "  ├─ Status: ${response.code}")
-            Log.d(RetrofitClient.TAG, "  └─ Protocol: ${response.protocol}")
 
             response
         } catch (e: Exception) {
-            Log.e(RetrofitClient.TAG, "❌ Security Error: ${e.message}")
             throw e
         }
     }
@@ -120,7 +99,6 @@ object RetrofitClient {
                 .digest(dataToSign.toByteArray())
                 .joinToString("") { "%02x".format(it) }
         } catch (e: Exception) {
-            Log.e(TAG, "Error generating signature", e)
             throw e
         }
     }
@@ -133,7 +111,6 @@ object RetrofitClient {
                 request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build()
-                Log.d(TAG, "🔒 Security: Cache enabled (5min)")
             }
 
             var response = chain.proceed(request)
@@ -146,18 +123,14 @@ object RetrofitClient {
 
             response
         } catch (e: Exception) {
-            Log.e(TAG, "❌ Cache Error: ${e.message}")
             throw e
         }
     }
 
     val apiService: ApiService by lazy {
         try {
-            Log.d(TAG, "🔒 Security: API service ready")
-            Log.d(TAG, "  └─ All security measures active")
             retrofit.create(ApiService::class.java)
         } catch (e: Exception) {
-            Log.e(TAG, "❌ Service Error: ${e.message}")
             throw e
         }
     }
