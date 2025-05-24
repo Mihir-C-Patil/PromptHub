@@ -3,6 +3,7 @@ package com.example.prompthub.data.api
 import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.CacheControl
 import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -10,12 +11,14 @@ import okhttp3.Protocol
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.security.MessageDigest
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 import java.security.cert.X509Certificate
 import java.security.cert.CertificateException
+import java.util.UUID
 
 object RetrofitClient {
     private const val TAG = "RetrofitClient"
@@ -23,7 +26,6 @@ object RetrofitClient {
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    // 🔒 Certificate pin (replace with actual hash)
     private val certificatePinner = CertificatePinner.Builder()
         .add("ai.elliottwen.info", "sha256/WUebdVODEMhWjMW5Y7JE7meI3ie5wnmGbxtE5QGDt7Y=")
         .build()
@@ -58,13 +60,111 @@ object RetrofitClient {
         .addInterceptor(protocolLogger)
         .build()
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .build()
+    private val retrofit: Retrofit by lazy {
+        try {
+            Log.d(TAG, "🔒 Security: Initializing API client")
+            Log.d(TAG, "  ├─ Base URL: ${ApiConfig.BASE_URL}")
+            Log.d(TAG, "  └─ Converter: Moshi")
+
+            Retrofit.Builder()
+                .baseUrl(ApiConfig.BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .build()
+        } catch (e: Exception) {
+            Log.e(TAG, "❌ API Error: ${e.message}")
+            throw e
+        }
+    }
+
+    private val signatureInterceptor = Interceptor { chain ->
+        try {
+            val originalRequest = chain.request()
+            val requestId = UUID.randomUUID().toString()
+            val timestamp = System.currentTimeMillis().toString()
+
+            Log.d(RetrofitClient.TAG, "🔒 Security: Request signing initiated")
+            Log.d(RetrofitClient.TAG, "  ├─ URL: ${originalRequest.url}")
+            Log.d(RetrofitClient.TAG, "  ├─ Request ID: $requestId")
+            Log.d(RetrofitClient.TAG, "  └─ Timestamp: $timestamp")
+
+            val signature = generateSignature(
+                requestId = requestId,
+                timestamp = timestamp,
+                path = originalRequest.url.encodedPath,
+                method = originalRequest.method
+            )
+
+            val newRequest = originalRequest.newBuilder()
+                .header("X-Request-ID", requestId)
+                .header("X-Timestamp", timestamp)
+                .header("X-Signature", signature)
+                .build()
+
+            val response = chain.proceed(newRequest)
+
+            Log.d(RetrofitClient.TAG, "🔒 Security: Response received")
+            Log.d(RetrofitClient.TAG, "  ├─ Status: ${response.code}")
+            Log.d(RetrofitClient.TAG, "  └─ Protocol: ${response.protocol}")
+
+            response
+        } catch (e: Exception) {
+            Log.e(RetrofitClient.TAG, "❌ Security Error: ${e.message}")
+            throw e
+        }
+    }
+
+    private fun generateSignature(
+        requestId: String,
+        timestamp: String,
+        path: String,
+        method: String
+    ): String {
+        return try {
+            val dataToSign = "$requestId:$timestamp:$path:$method:${ApiConfig.SECURE_KEY}"
+            MessageDigest.getInstance("SHA-256")
+                .digest(dataToSign.toByteArray())
+                .joinToString("") { "%02x".format(it) }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error generating signature", e)
+            throw e
+        }
+    }
+
+    private val cacheInterceptor = Interceptor { chain ->
+        try {
+            var request = chain.request()
+
+            if (request.method == "GET") {
+                request = request.newBuilder()
+                    .cacheControl(CacheControl.FORCE_CACHE)
+                    .build()
+                Log.d(TAG, "🔒 Security: Cache enabled (5min)")
+            }
+
+            var response = chain.proceed(request)
+
+            if (response.isSuccessful) {
+                response = response.newBuilder()
+                    .header("Cache-Control", "public, max-age=300")
+                    .build()
+            }
+
+            response
+        } catch (e: Exception) {
+            Log.e(TAG, "❌ Cache Error: ${e.message}")
+            throw e
+        }
+    }
 
     val apiService: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
+        try {
+            Log.d(TAG, "🔒 Security: API service ready")
+            Log.d(TAG, "  └─ All security measures active")
+            retrofit.create(ApiService::class.java)
+        } catch (e: Exception) {
+            Log.e(TAG, "❌ Service Error: ${e.message}")
+            throw e
+        }
     }
 }

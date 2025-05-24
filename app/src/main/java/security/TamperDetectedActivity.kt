@@ -16,7 +16,8 @@ class TamperDetectedActivity : Activity() {
             setBackgroundColor(Color.RED)
 
             val warningText = TextView(this@TamperDetectedActivity).apply {
-                text = "⚠️ Application Tampered!\nThis app has been modified or is not genuine."
+                val message = "⚠️ Application Tampered!\nThis app has been modified or is not genuine."
+                text = message
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 gravity = Gravity.CENTER
