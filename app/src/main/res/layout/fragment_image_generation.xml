@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.imagegeneration.ImageGenerationFragment">
+    tools:context=".ui.imagegeneration.gdfjklfadvb">
 
-    <!-- EditText for the prompt -->
     <EditText
         android:id="@+id/promptEditText"
         android:layout_width="0dp"
@@ -24,7 +23,6 @@
         android:layout_marginTop="100dp"
         android:textColor="?attr/colorOnSurface"/>
 
-    <!-- Button to generate the image -->
     <Button
         android:id="@+id/generateButton"
         android:layout_width="0dp"
@@ -35,7 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
-    <!-- ImageView to display the generated image -->
     <ImageView
         android:contentDescription="@string/imageDescription"
         android:id="@+id/imageView"
@@ -49,7 +46,6 @@
         app:layout_constraintDimensionRatio="1:1"
         android:layout_marginTop="16dp"/>
 
-    <!-- ProgressBar for loading indication -->
     <ProgressBar
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
@@ -62,7 +58,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         tools:visibility="visible"/>
 
-    <!-- Button to save the image -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="0dp"
